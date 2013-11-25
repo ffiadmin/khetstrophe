@@ -76,8 +76,8 @@ inline void safeOnResetDevice(T& ptr)
 //=============================================================================
 
 // window
-const char CLASS_NAME[] = "createThisClass";
-const char GAME_TITLE[] = "Game Engine v2.9 Demo";
+const char CLASS_NAME[] = "Khetstrophe";
+const char GAME_TITLE[] = "Khetstrophe";
 const bool FULLSCREEN = false;              // windowed or fullscreen
 const UINT GAME_WIDTH =  640;               // width of game in pixels
 const UINT GAME_HEIGHT = 480;               // height of game in pixels
