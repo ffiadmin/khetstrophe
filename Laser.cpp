@@ -2,7 +2,7 @@
 
 /**
  * CONSTRUCTOR
- * 
+ *
  * This constructor initializes all of the variables and default
  * settings for this Laser object.
  *
@@ -10,23 +10,22 @@
  * destruct, by default.
  *
  * @access public
- * @param  DWORD  color The color of the laser graphic
+ * @param  Game*     game     A pointer to the controlling Game object
+ * @param  Graphics* graphics A pointer to the Graphics objectstore
+ * @param  DWORD     color    The color of the laser graphic
  * @return void
 */
 
-Laser::Laser(DWORD color) : 
-        collisions(0), color(color), destroyConst(0), destroyCounter(0), destroyMethod(Laser::NO_DESTROY),
-        destroyPending(false), lastPixelIndex(0), timeConst(1000.0 / CLOCKS_PER_SEC), timeStart(0),
-        tailImages(laserNS::TAIL, Image()) {
-        this->collisionType     = entityNS::ROTATED_BOX;
-        this->spriteData.height = laserNS::HEAD_HEIGHT;
-        this->spriteData.scale  = 1;
-        this->spriteData.width  = laserNS::HEAD_WIDTH;
-        this->spriteData.x      = laserNS::X;
-        this->spriteData.y      = laserNS::Y;
-        this->velocity.x        = laserNS::VELOCITY;
-        this->velocity.y        = laserNS::VELOCITY;
-        mass = laserNS::MASS;
+Laser::Laser(Game* game, Graphics* graphics, DWORD color) : collisions(0), color(color), destroyConst(0), destroyCounter(0), destroyMethod(Laser::NO_DESTROY), destroyPending(false), game(game), graphics(graphics), lastPixelIndex(0), timeConst(1000.0 / CLOCKS_PER_SEC), timeStart(0), tailImages(laserNS::TAIL, Image()) {
+	this->collisionType = entityNS::ROTATED_BOX;
+	this->mass = 1.0f;
+	this->spriteData.height = laserNS::HEAD_HEIGHT;
+	this->spriteData.scale = 1.0f;
+	this->spriteData.width = laserNS::HEAD_WIDTH;
+	this->spriteData.x = laserNS::X;
+	this->spriteData.y = laserNS::Y;
+	this->velocity.x = laserNS::VELOCITY;
+	this->velocity.y = laserNS::VELOCITY;
 }
 
 /**
@@ -44,21 +43,21 @@ Laser::Laser(DWORD color) :
 
 void Laser::activate(float x, float y) {
 //Activate the head pixel of the laser and set its position
-        this->setActive(true);
-        this->setVisible(true);
-        this->setX(x);
-        this->setY(y);
+	this->setActive(true);
+	this->setVisible(true);
+	this->setX(x);
+	this->setY(y);
 
 //Activate each of the tail pixels and set their position
-        for(vector<Image>::iterator it = this->tailImages.begin(); it != this->tailImages.end(); ++it) {
-                it->setX(x);
-                it->setY(y);
-                it->setVisible(true);
-        }
+	for (vector<Image>::iterator it = this->tailImages.begin(); it != this->tailImages.end(); ++it) {
+		it->setX(x);
+		it->setY(y);
+		it->setVisible(true);
+	}
 
 //Start the clock
-        if (this->destroyMethod == Laser::TIMER_DESTROY)
-                this->timeStart = clock();
+	if (this->destroyMethod == Laser::TIMER_DESTROY)
+		this->timeStart = clock();
 }
 
 /**
@@ -70,22 +69,22 @@ void Laser::activate(float x, float y) {
 
 bool Laser::checkDestory() {
 //Do not destroy the laser while in this state
-        if (this->destroyMethod == Laser::NO_DESTROY)
-                return false;
+	if (this->destroyMethod == Laser::NO_DESTROY)
+		return false;
 
 //Destroy the laser after N number of collisions
-        if (this->destroyMethod == Laser::COLLISION_DESTROY && this->collisions >= this->destroyConst) {
-                this->destroy();
-                return true;
-        }
+	if (this->destroyMethod == Laser::COLLISION_DESTROY && this->collisions >= this->destroyConst) {
+		this->destroy();
+		return true;
+	}
 
 //Destroy the laser after N milliseconds
-        if (this->destroyMethod == Laser::TIMER_DESTROY && (clock() - this->timeStart) * this->timeConst >= this->destroyConst) {
-                this->destroy();
-                return true;
-        }
+	if (this->destroyMethod == Laser::TIMER_DESTROY && (clock() - this->timeStart) * this->timeConst >= this->destroyConst) {
+		this->destroy();
+		return true;
+	}
 
-        return false;
+	return false;
 }
 
 /**
@@ -99,7 +98,7 @@ bool Laser::checkDestory() {
 */
 
 void Laser::destroy() {
-        this->destroyPending = true;
+	this->destroyPending = true;
 }
 
 /**
@@ -110,16 +109,16 @@ void Laser::destroy() {
 */
 
 void Laser::draw() {
-        Image::draw(this->color);
+	Image::draw(this->color);
 
-        for(vector<Image>::iterator it = this->tailImages.begin(); it != this->tailImages.end(); ++it) {
-                it->draw(this->color);
-        }
+	for (vector<Image>::iterator it = this->tailImages.begin(); it != this->tailImages.end(); ++it) {
+		it->draw(this->color);
+	}
 }
 
 /**
  * Called once tail of the laser has fully collapsed. This method will
- * deactivate and hide the laser head and tail, and reset all of the 
+ * deactivate and hide the laser head and tail, and reset all of the
  * variables which have been used to track the state of the laser.
  *
  * In other words, this function removes the laser from the screen and
@@ -131,29 +130,29 @@ void Laser::draw() {
 
 void Laser::finalizeDestruction() {
 //Disable the laser and tail
-        this->setActive(false);
-        this->setVisible(false);
+	this->setActive(false);
+	this->setVisible(false);
 
-        for(vector<Image>::iterator it = this->tailImages.begin(); it != this->tailImages.end(); ++it) {
-                it->setVisible(false);
-        }
+	for (vector<Image>::iterator it = this->tailImages.begin(); it != this->tailImages.end(); ++it) {
+		it->setVisible(false);
+	}
 
 //Reset some of the variables used to track the state of the laser
-        this->collisions = 0;
-        this->destroyCounter = 0;
-        this->destroyPending = false;
-        this->lastPixelIndex = 0;
+	this->collisions = 0;
+	this->destroyCounter = 0;
+	this->destroyPending = false;
+	this->lastPixelIndex = 0;
 }
 
 /**
  * DEGREE MODE
- * 
+ *
  * Reactivates the laser and fires it from a given X and Y position
  * at a given angle.
  *
  * This method follows the standards of the cartesian corrdinate system,
  * where an angle of 0 degrees will point along the positive X axis, 90
- * degrees will point along the positive Y axis, 180 degrees will point 
+ * degrees will point along the positive Y axis, 180 degrees will point
  * along the negative X axis, etc...
  *
  * @access public
@@ -164,25 +163,25 @@ void Laser::finalizeDestruction() {
 */
 
 void Laser::fireDeg(float x, float y, float angle) {
-        if (!this->active) {
-        //Calculate the angle of the velocity vector
-                this->velocity.x = laserNS::VELOCITY * sin(static_cast<float>(PI)/180.0f * (90.0f + angle));
-                this->velocity.y = laserNS::VELOCITY * cos(static_cast<float>(PI)/180.0f * (90.0f + angle));
+	if (!this->active) {
+	//Calculate the angle of the velocity vector
+		this->velocity.x = laserNS::VELOCITY * sin(static_cast<float>(PI) / 180.0f * (90.0f + angle));
+		this->velocity.y = laserNS::VELOCITY * cos(static_cast<float>(PI) / 180.0f * (90.0f + angle));
 
-        //Activate the laser
-                this->activate(x, y);
-        }
+	//Activate the laser
+		this->activate(x, y);
+	}
 }
 
 /**
  * RADIAN MODE
- * 
+ *
  * Reactivates the laser and fires it from a given X and Y position
  * at a given angle.
  *
  * This method follows the standards of the cartesian corrdinate system,
  * where an angle of 0 radians will point along the positive X axis, PI/2
- * radians will point along the positive Y axis, PI radians will point 
+ * radians will point along the positive Y axis, PI radians will point
  * along the negative X axis, etc...
  *
  * @access public
@@ -193,22 +192,14 @@ void Laser::fireDeg(float x, float y, float angle) {
 */
 
 void Laser::fireRad(float x, float y, float angle) {
-        if (!this->active) {
-        //Calculate the angle of the velocity vector
-                this->velocity.x = laserNS::VELOCITY * sin(static_cast<float>(PI)/2.0f + angle);
-                this->velocity.y = laserNS::VELOCITY * cos(static_cast<float>(PI)/2.0f + angle);
+	if (!this->active) {
+	//Calculate the angle of the velocity vector
+		this->velocity.x = laserNS::VELOCITY * sin(static_cast<float>(PI) / 2.0f + angle);
+		this->velocity.y = laserNS::VELOCITY * cos(static_cast<float>(PI) / 2.0f + angle);
 
-        //Activate the laser
-                this->activate(x, y);
-        }
-}
-
-void Laser::fire(float x, float y)
-{
-        if(!this->active)
-        {
-                this->activate(x,y);
-        }
+	//Activate the laser
+		this->activate(x, y);
+	}
 }
 
 /**
@@ -220,7 +211,7 @@ void Laser::fire(float x, float y)
 */
 
 int Laser::getCollisions() {
-        return this->collisions;
+	return this->collisions;
 }
 
 /**
@@ -232,11 +223,11 @@ int Laser::getCollisions() {
 */
 
 void Laser::increaseCollision(int number) {
-        this->collisions += number;
+	this->collisions += number;
 }
 
 /**
- * Initialize the Laser object and each of the objects which 
+ * Initialize the Laser object and each of the objects which
  * constitue the tail.
  *
  * @access public
@@ -248,24 +239,28 @@ void Laser::increaseCollision(int number) {
  * @return void
 */
 
-bool Laser::initialize(Game *gamePtr, int width, int height, int ncols, TextureManager *textureM) {
-        bool retVal = Entity::initialize(gamePtr, width, height, ncols, textureM);
-        this->setActive(false);
-        this->setVisible(false);
+bool Laser::initialize() {
+//Initialize the texture
+	tm.initialize(this->graphics, laserNS::GRAPHIC);
 
-        for(vector<Image>::iterator it = this->tailImages.begin(); it != this->tailImages.end(); ++it) {
-                it->initialize(this->graphics, 1, 1, 1, textureM);
-                it->setX(laserNS::X);
-                it->setY(laserNS::Y);
-                it->setVisible(false);
-        }
-        
-        return retVal;
+//Initialize the head and tail objects
+	bool retVal = Entity::initialize(this->game, laserNS::HEAD_WIDTH, laserNS::HEAD_HEIGHT, 1, &tm);
+	this->setActive(false);
+	this->setVisible(false);
+
+	for (vector<Image>::iterator it = this->tailImages.begin(); it != this->tailImages.end(); ++it) {
+		it->initialize(this->graphics, 1, 1, 1, &tm);
+		it->setX(laserNS::X);
+		it->setY(laserNS::Y);
+		it->setVisible(false);
+	}
+
+	return retVal;
 }
 
 /**
  * Set the method by which the laser will self destruct.
- * 
+ *
  * For the first parameter, there are three possible options:
  *  - Laser::COLLISION_DESTROY - Self destruct after N collisions
  *  - Laser::NO_DESTROY        - Do not self destruct (default)
@@ -285,11 +280,11 @@ bool Laser::initialize(Game *gamePtr, int width, int height, int ncols, TextureM
 */
 
 void Laser::setSelfDestructMethod(char method, int destroyConst) {
-        if (method == Laser::COLLISION_DESTROY || method == Laser::NO_DESTROY || method == Laser::TIMER_DESTROY)
-                this->destroyMethod = method;
+	if (method == Laser::COLLISION_DESTROY || method == Laser::NO_DESTROY || method == Laser::TIMER_DESTROY)
+		this->destroyMethod = method;
 
-        if (destroyConst >= 0)
-                this->destroyConst = destroyConst;
+	if (destroyConst >= 0)
+		this->destroyConst = destroyConst;
 }
 
 /**
@@ -309,44 +304,44 @@ void Laser::setSelfDestructMethod(char method, int destroyConst) {
 */
 
 void Laser::update(float frameTime) {
-        Entity::update(frameTime);
+	Entity::update(frameTime);
 
 //Check to see if this laser should be destroyed
-        this->checkDestory();
-        
-//Update the tail location
-        this->tailImages[this->lastPixelIndex].setX(this->spriteData.x);
-        this->tailImages[this->lastPixelIndex].setY(this->spriteData.y);
-        this->lastPixelIndex = (this->lastPixelIndex == laserNS::TAIL - 1 ? 0 : ++this->lastPixelIndex);
+	this->checkDestory();
 
-        if (!this->destroyPending) {
-        //Update the location of the head
-                this->spriteData.x += frameTime * this->velocity.x;
-                this->spriteData.y += frameTime * this->velocity.y;
-        
-        //Detect collisions against the edge of the window
-                if (this->spriteData.x > GAME_WIDTH - laserNS::HEAD_WIDTH) {   // Right edge
-                        this->spriteData.x = GAME_WIDTH - laserNS::HEAD_WIDTH;
-                        this->velocity.x = -this->velocity.x;
-                        ++this->collisions;
-                } else if (this->spriteData.x < 0) {                           // Left edge
-                        this->spriteData.x = 0;
-                        this->velocity.x = -this->velocity.x;
-                        ++this->collisions;
-                }
-        
-                if (this->spriteData.y > GAME_HEIGHT - laserNS::HEAD_HEIGHT) { // Bottom edge
-                        this->spriteData.y = GAME_HEIGHT - laserNS::HEAD_HEIGHT;
-                        this->velocity.y = -this->velocity.y;
-                        ++this->collisions;
-                } else if (spriteData.y < 0) {                                 // Top edge
-                        this->spriteData.y = 0;
-                        this->velocity.y = -this->velocity.y;
-                        ++this->collisions;
-                }
-        } else {
-                if (++this->destroyCounter == laserNS::TAIL) {
-                        this->finalizeDestruction();
-                }
-        }
+//Update the tail location
+	this->tailImages[this->lastPixelIndex].setX(this->spriteData.x);
+	this->tailImages[this->lastPixelIndex].setY(this->spriteData.y);
+	this->lastPixelIndex = (this->lastPixelIndex == laserNS::TAIL - 1 ? 0 : ++this->lastPixelIndex);
+
+	if (!this->destroyPending) {
+	//Update the location of the head
+		this->spriteData.x += frameTime * this->velocity.x;
+		this->spriteData.y += frameTime * this->velocity.y;
+
+	//Detect collisions against the edge of the window
+		if (this->spriteData.x > GAME_WIDTH - laserNS::HEAD_WIDTH) {   // Right edge
+			this->spriteData.x = GAME_WIDTH - laserNS::HEAD_WIDTH;
+			this->velocity.x = -this->velocity.x;
+			++this->collisions;
+		} else if (this->spriteData.x < 0) {                           // Left edge
+			this->spriteData.x = 0;
+			this->velocity.x = -this->velocity.x;
+			++this->collisions;
+		}
+
+		if (this->spriteData.y > GAME_HEIGHT - laserNS::HEAD_HEIGHT) { // Bottom edge
+			this->spriteData.y = GAME_HEIGHT - laserNS::HEAD_HEIGHT;
+			this->velocity.y = -this->velocity.y;
+			++this->collisions;
+		} else if (spriteData.y < 0) {                                 // Top edge
+			this->spriteData.y = 0;
+			this->velocity.y = -this->velocity.y;
+			++this->collisions;
+		}
+	} else {
+		if (++this->destroyCounter == laserNS::TAIL) {
+			this->finalizeDestruction();
+		}
+	}
 }

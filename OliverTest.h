@@ -1,12 +1,16 @@
 #ifndef OLIVER_TEST_H
 #define OLIVER_TEST_H
 
-#include "Explode.h"
 #include "game.h"
+#include "Laser.h"
+#include "Tile.h"
 
 class OliverTest :	public Game {
 private : 
-	Explode* e;
+	char dir;
+
+	Laser* l;
+	Tile* t;
 
 public : 
 	OliverTest();
