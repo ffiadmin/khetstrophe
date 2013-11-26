@@ -11,6 +11,8 @@ private :
 
 	Laser* l;
 	Tile* t;
+	Tile* t2;
+	Tile* tiles[10][10];
 
 public : 
 	OliverTest();
