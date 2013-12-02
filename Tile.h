@@ -14,8 +14,8 @@ using std::string;
 
 namespace tileNS {
 	const char GRAPHIC[] = "pictures\\tile.jpg";
-	const int  HEIGHT    = 48;
-	const int  WIDTH     = 48;
+	const int  HEIGHT    = 64;
+	const int  WIDTH     = 64;
 }
 
 class Tile : public Entity {
