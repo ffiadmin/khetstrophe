@@ -53,8 +53,8 @@ void OliverTest::initialize(HWND hwnd) {
 			tiles[i][j] = new Tile(this, graphics);
 			tiles[i][j]->setGraphic("pictures\\tile.jpg");
 			tiles[i][j]->initialize();
-			tiles[i][j]->setX(j*48.0f);
-			tiles[i][j]->setY(i*48.0f);
+			tiles[i][j]->setX(j*64.0f);
+			tiles[i][j]->setY(i*64.0f);
 		}
 	}
 }
@@ -77,7 +77,7 @@ void OliverTest::render() {
 	l->draw();
 	l2->draw();
 
-    graphics->spriteEnd();   
+    graphics->spriteEnd();
 }
 
 void OliverTest::resetAll() {
