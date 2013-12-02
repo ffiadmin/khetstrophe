@@ -8,8 +8,9 @@
 class OliverTest :	public Game {
 private : 
 	char dir;
-
+	float fireDeg1, fireDeg2;
 	Laser* l;
+	Laser* l2;
 	Tile* t;
 	Tile* t2;
 	Tile* tiles[10][10];
