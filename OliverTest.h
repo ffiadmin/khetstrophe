@@ -2,6 +2,7 @@
 #define OLIVER_TEST_H
 
 #include "game.h"
+#include "Grid.h"
 #include "Laser.h"
 #include "Tile.h"
 
@@ -9,6 +10,7 @@ class OliverTest :	public Game {
 private : 
 	char dir;
 	float fireDeg1, fireDeg2;
+	Grid<Tile, 10, 10>* g;
 	Laser* l;
 	Laser* l2;
 	Tile* t;

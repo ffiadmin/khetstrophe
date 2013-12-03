@@ -34,6 +34,9 @@ void OliverTest::initialize(HWND hwnd) {
 	l2->initialize();
 	l2->setSelfDestructMethod(Laser::TIMER_DESTROY, 5000);
 
+	this->g = new Grid<Tile, 10, 10>(this, this->graphics);
+	this->g->initialize();
+
 	//t = new Tile(this, graphics);
 	//t->setGraphic("pictures\\tile-white.jpg");
 	//t->initialize();
@@ -46,17 +49,17 @@ void OliverTest::initialize(HWND hwnd) {
 	//t2->setX(150.0f);
 	//t2->setY(200.0f);
 
-	for (int i = 0; i < 10; ++i)
+	/*for (int i = 0; i < 10; ++i)
 	{
 		for (int j = 0; j < 10; ++j)
 		{
 			tiles[i][j] = new Tile(this, graphics);
 			tiles[i][j]->setGraphic("pictures\\tile.jpg");
 			tiles[i][j]->initialize();
-			tiles[i][j]->setX(j*64.0f);
-			tiles[i][j]->setY(i*64.0f);
+			tiles[i][j]->setX(j*48.0f);
+			tiles[i][j]->setY(i*48.0f);
 		}
-	}
+	}*/
 }
 
 void OliverTest::releaseAll() {
@@ -67,17 +70,19 @@ void OliverTest::render() {
 	graphics->spriteBegin();
 	//t->draw();
 	//t2->draw();
+	/*
 	for (int i = 0; i < 10; ++i)
 	{
 		for (int j = 0; j < 10; ++j)
 		{
 			tiles[i][j]->draw();
 		}
-	}
+	}*/
+	this->g->draw();
 	l->draw();
 	l2->draw();
-
-    graphics->spriteEnd();
+	
+    graphics->spriteEnd();   
 }
 
 void OliverTest::resetAll() {
@@ -87,16 +92,18 @@ void OliverTest::resetAll() {
 void OliverTest::update() {
 	//t->update(frameTime);
 	//t2->update(frameTime);
-	for (int i = 0; i < 10; ++i)
+	/*for (int i = 0; i < 10; ++i)
 	{
 		for (int j = 0; j < 10; ++j)
 		{
 			tiles[i][j]->update(frameTime);
 		}
-	}
+	}*/
 	l->fireDeg(608.0f, 426.0f, fireDeg1);
 	l2->fireDeg(32.0f, 64.0f, fireDeg2);
 
 	l->update(frameTime);
 	l2->update(frameTime);
+
+	this->g->update(frameTime);
 }
