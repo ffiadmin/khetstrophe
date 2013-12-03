@@ -2,7 +2,10 @@
 #define GRID_H
 
 #include "game.h"
+#include "gameError.h"
 #include "graphics.h"
+#include "image.h"
+#include "textureManager.h"
 #include "Tile.h"
 
 #include <string>
@@ -20,15 +23,18 @@ namespace gridNS {
 template <class T, int X, int Y>
 class Grid {
 private : 
+	Image* background;
+	TextureManager backgroundTM;
 	Game* game;
 	Graphics* graphics;
 
+	char *bkgSource;
 	vector<vector<T*>> pieces;
 	int x;
 	int y;
 
 public : 
-	Grid(Game* game, Graphics* graphics) : game(game), graphics(graphics) {
+	Grid(Game* game, Graphics* graphics) : bkgSource('\0'), game(game), graphics(graphics) {
 		this->x = 0;
 		this->y = 0;
 		this->pieces.resize(X);
@@ -38,7 +44,19 @@ public :
 		}
 	}
 
+	~Grid() {
+		for (int i = 0; i < X; ++i) {
+			for (int j = 0; j < Y; ++j) {
+				delete this->pieces[i][j];
+			}
+		}
+	}
+
 	void draw() {
+		if (this->bkgSource != '\0') {
+			this->background.draw();
+		}
+
 		for (int i = 0; i < X; ++i) {
 			for (int j = 0; j < Y; ++j) {
 				this->pieces[i][j]->draw();
@@ -51,6 +69,22 @@ public :
 	}
 
 	void initialize() {
+	//Initialize the background
+		if (this->bkgSource != '\0') {
+			int height = gridNS::PADDING + Y * gridNS::HEIGHT;
+			int width = gridNS::PADDING + X * gridNS::WIDTH;
+
+			if (!this->backgroundTM.initialize(this->graphics, this->bkgSource))
+				throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing the grid backgound texture"));
+
+			if (!this->background.initialize(this->graphics, width, height, 0, &this->backgroundTM))
+				throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing the grid backgound"));
+
+			this->background.setX(this->x);
+			this->background.setY(this->y);
+		}
+
+	//Initialize the tiles
 		T* current;
 
 		for (int i = 0; i < X; ++i) {
@@ -62,6 +96,10 @@ public :
 				this->pieces[i][j]->setY(this->y + gridNS::PADDING + j * gridNS::HEIGHT);
 			}
 		}
+	}
+
+	void setBkg(char* source) {
+		this->bkgSource = source;
 	}
 
 	void setX(int x) {
@@ -87,6 +125,12 @@ public :
 	}
 
 	void update(int frameTime) {
+		if (this->bkgSource != '\0') {
+			this->background.setX(this->x);
+			this->background.setY(this->y);
+			this->background.update();
+		}
+
 		T* current;
 
 		for (int i = 0; i < X; ++i) {
