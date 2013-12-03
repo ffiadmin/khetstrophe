@@ -14,3 +14,11 @@ void KhetPiece::rotate(int dir)
 	else if(getCurrentFrame() > 3)
 		setCurrentFrame(0);
 }
+
+void KhetPiece::setOrientation(int newOrientation)
+{
+	if(newOrientation > 3 || newOrientation < 0)
+		throw Invalid_orientation_val();
+	else
+		orientation = newOrientation;
+}

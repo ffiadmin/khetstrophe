@@ -13,6 +13,7 @@ public:
 										 // dir: 0 left, 1 up, 2 right, 3 down
 	
 	int getOrientation() {return orientation;}
+	void setOrientation(int newOrientation);
 
 	char getColor() {return color;}
 	void setColor(char c) {color = c;}
@@ -23,5 +24,6 @@ private:
 };
 
 class Invalid_rotation_dir_argument {};
+class Invalid_orientation_val {};
 
 #endif
