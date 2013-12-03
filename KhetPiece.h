@@ -3,11 +3,14 @@
 #ifndef KHETPIECE_H
 #define KHETPIECE_H
 
+enum RESPONSE {UP, DOWN, LEFT, RIGHT, DESTROY, NOTHING};
+
 class KhetPiece : public Tile
 {
 public:
 	void rotate(int dir); // 0 left (-90 degree) rotation, 1 right (90 degree) rotation
-	virtual void onCollision()=0; // what to do when piece is hit by laser
+	virtual void onCollision(int dir)=0; // what to do when piece is hit by laser
+										 // dir: 0 left, 1 up, 2 right, 3 down
 	
 	int getOrientation() {return orientation;}
 
