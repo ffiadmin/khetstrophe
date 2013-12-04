@@ -5,9 +5,14 @@
 
 enum RESPONSE {UP, DOWN, LEFT, RIGHT, DESTROY, NOTHING};
 
+class Cannot_use_KhetPiece_default_constructor {};
+
 class KhetPiece : public Tile
 {
 public:
+	KhetPiece() {throw Cannot_use_KhetPiece_default_constructor();}
+	KhetPiece(Game* game, Graphics* graphics);
+
 	void rotate(int dir); // 0 left (-90 degree) rotation, 1 right (90 degree) rotation
 	virtual RESPONSE onCollision(int dir)=0; // what to do when piece is hit by laser
 										 // dir: 0 left, 1 up, 2 right, 3 down

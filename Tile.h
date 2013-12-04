@@ -12,6 +12,8 @@
 
 using std::string;
 
+class Cannot_use_Tile_default_constructor {};
+
 namespace tileNS {
 	const char GRAPHIC[] = "pictures\\tile.jpg";
 	const int  HEIGHT    = 64;
@@ -30,6 +32,7 @@ private :
 	D3DXVECTOR2 intersectDepthVector(Entity &ent);
 
 public : 
+	Tile() {throw Cannot_use_Tile_default_constructor();}
 	Tile(Game* game, Graphics* graphics);
 	virtual ~Tile();
 
