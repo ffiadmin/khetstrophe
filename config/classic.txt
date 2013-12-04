@@ -1,11 +1,11 @@
 X   AHAP  
   P       
-   P      
-P P SS P P
-P P SS P P
+   p      
+P p SS P p
+P p ss P p
       P   
-       P  
-  PAHA   X
+       p  
+  paha   x
 
 D   DDDD  
   L       
@@ -15,12 +15,3 @@ D U LD R L
       D   
        R  
   UUUU   U
-
-R   RRRR  
-  R       
-   W      
-R W RR R W
-R W WW R W
-      R   
-       W  
-  WWWW   W
