@@ -17,16 +17,14 @@ public:
 			{
 			case 0:
 				return DESTROY;
-				break;
 			case 1:
 				return DESTROY;
-				break;
 			case 2:
 				return UP;
-				break;
 			case 3:
 				return LEFT;
-				break;
+			default:
+				return NOTHING;
 			}
 			break;
 		case 1:
@@ -34,16 +32,14 @@ public:
 			{
 			case 0:
 				return UP;
-				break;
 			case 1:
 				return DESTROY;
-				break;
 			case 2:
 				return DESTROY;
-				break;
 			case 3:
 				return RIGHT;	
-				break;
+			default:
+				return NOTHING;
 			}
 			break;
 		case 2:
@@ -51,16 +47,14 @@ public:
 			{
 			case 0:
 				return DOWN;
-				break;
 			case 1:
 				return RIGHT;
-				break;
 			case 2:
 				return DESTROY;
-				break;
 			case 3:
 				return DESTROY;
-				break;
+			default:
+				return NOTHING;
 			}
 			break;
 		case 3:
@@ -68,18 +62,18 @@ public:
 			{
 			case 0:
 				return DESTROY;
-				break;
 			case 1:
 				return LEFT;
-				break;
 			case 2:
 				return DOWN;
-				break;
 			case 3:
 				return DESTROY;
-				break;
+			default:
+				return NOTHING;
 			}
 			break;
+		default:
+			return NOTHING;
 		}
 	}
 private:
