@@ -8,6 +8,7 @@
 #include "game.h"
 #include "gameError.h"
 #include "graphics.h"
+#include "InvalidOrientation.h"
 #include "textureManager.h"
 
 using std::string;
@@ -20,7 +21,7 @@ namespace tileNS {
 
 class Tile : public Entity {
 private : 
-	char direction;
+	int direction;
 	Game* game;
 	Graphics* graphics;
 	TextureManager tm;
@@ -41,7 +42,7 @@ public :
 	virtual bool collidesWithLeft(Entity &ent, D3DXVECTOR2 &collisionVector);
 	virtual bool collidesWithRight(Entity &ent, D3DXVECTOR2 &collisionVector);
 	virtual bool collidesWithTop(Entity &ent, D3DXVECTOR2 &collisionVector);
-	char getDirection();
+	int getDirection();
 	int getOrientation();
 	virtual void initialize();
 	void setGraphic(string graphic);

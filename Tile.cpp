@@ -35,15 +35,15 @@ bool Tile::collidesWith(Entity &ent, D3DXVECTOR2 &collisionVector) {
 		if (this->direction == ' ') {
 			if (absX > absY) {
 				if (v.y < 0.0f) {
-					this->direction = 'T';
+					this->direction = 3;
 				} else {
-					this->direction = 'B';
+					this->direction = 1;
 				}
 			} else {
 				if (v.x < 0.0f) {
-					this->direction = 'L';
+					this->direction = 2;
 				} else {
-					this->direction = 'R';
+					this->direction = 0;
 				}
 			}
 		}
@@ -55,22 +55,22 @@ bool Tile::collidesWith(Entity &ent, D3DXVECTOR2 &collisionVector) {
 }
 
 bool Tile::collidesWithBottom(Entity &ent, D3DXVECTOR2 &collisionVector) {
-	return Tile::collidesWith(ent, collisionVector) && this->direction == 'B';
+	return Tile::collidesWith(ent, collisionVector) && this->direction == 1;
 }
 
 bool Tile::collidesWithLeft(Entity &ent, D3DXVECTOR2 &collisionVector) {
-	return Tile::collidesWith(ent, collisionVector) && this->direction == 'L';
+	return Tile::collidesWith(ent, collisionVector) && this->direction == 2;
 }
 
 bool Tile::collidesWithRight(Entity &ent, D3DXVECTOR2 &collisionVector) {
-	return Tile::collidesWith(ent, collisionVector) && this->direction == 'R';
+	return Tile::collidesWith(ent, collisionVector) && this->direction == 3;
 }
 
 bool Tile::collidesWithTop(Entity &ent, D3DXVECTOR2 &collisionVector) {
-	return Tile::collidesWith(ent, collisionVector) && this->direction == 'T';
+	return Tile::collidesWith(ent, collisionVector) && this->direction == 3;
 }
 
-char Tile::getDirection() {
+int Tile::getDirection() {
 	return this->direction;
 }
 
@@ -113,7 +113,7 @@ void Tile::setGraphic(string graphic) {
 
 void Tile::setOrientation(int orientation) {
 	if (orientation > 3 || orientation < 0) {
-		//throw Invalid_orientation_val();
+		throw InvalidOrientation("The Tile orientation value is invalid");
 	} else {
 		this->orientation = orientation;
 		setCurrentFrame(orientation);
