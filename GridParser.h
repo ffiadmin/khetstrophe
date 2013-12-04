@@ -29,17 +29,17 @@ public :
 		char awesome = this->fin.get();
 
 	//Good, this is a nice character
-		if (awesome != '\0' && !this->fin.eof()) {
-			return awesome;
+		if (awesome != '\n' && !this->fin.eof()) {
+			return static_cast<int>(awesome);
 		}
 
 	//Wait, end of line character
-		if (awesome == '\0' && !this->fin.eof()) {
+		if (awesome == '\n' && !this->fin.eof()) {
 			awesome = this->fin.get();
 
 		//Good, we are just wrapping onto a new line
-			if (awesome != '\0') {
-				return awesome;
+			if (awesome != '\n') {
+				return static_cast<int>(awesome);
 			}
 		}
 
@@ -53,16 +53,16 @@ public :
 		char awesome = this->fin.get();
 
 	//Good, this is a nice character
-		if (awesome != '\0' && !this->fin.eof()) {
+		if (awesome != '\n' && !this->fin.eof()) {
 			return this->configureTypes(awesome, game, graphics);
 		}
 
 	//Wait, end of line character
-		if (awesome == '\0' && !this->fin.eof()) {
+		if (awesome == '\n' && !this->fin.eof()) {
 			awesome = this->fin.get();
 
 		//Good, we are just wrapping onto a new line
-			if (awesome != '\0') {
+			if (awesome != '\n') {
 				return this->configureTypes(awesome, game, graphics);
 			}
 		}

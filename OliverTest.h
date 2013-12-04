@@ -11,7 +11,7 @@ class OliverTest :	public Game {
 private : 
 	char dir;
 	float fireDeg1, fireDeg2;
-	Grid<Tile, 10, 10>* g;
+	Grid<Tile, 10, 8>* g;
 	KhetParser<Tile>* kp;
 	Laser* l;
 	Laser* l2;

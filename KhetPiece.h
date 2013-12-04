@@ -22,6 +22,5 @@ private:
 };
 
 class Invalid_rotation_dir_argument {};
-class Invalid_orientation_val {};
 
 #endif

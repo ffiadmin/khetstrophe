@@ -26,7 +26,7 @@ namespace gridNS {
 
 template <class T, int X, int Y>
 class Grid {
-typedef void(*FPtr)(T);
+typedef void(*FPtr)(T*);
 private : 
 	Image background;
 	TextureManager backgroundTM;
@@ -48,8 +48,8 @@ public :
 		this->y = 0;
 		this->pieces.resize(X);
 
-		for (int i = 0; i < Y; ++i) {
-			this->pieces[i].resize(X);
+		for (int i = 0; i < X; ++i) {
+			this->pieces[i].resize(Y);
 		}
 	}
 
