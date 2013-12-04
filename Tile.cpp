@@ -1,22 +1,23 @@
 #include "Tile.h"
 
-Tile::Tile(Game* game, Graphics* graphics) : direction(' '), game(game), graphics(graphics) {
-	this->collisionType     = entityNS::NONE;
-	this->graphic           = tileNS::GRAPHIC;
-	this->mass              = 1.0f;
-	this->spriteData.height = tileNS::HEIGHT;
-	this->spriteData.scale  = 1;
-	this->spriteData.width  = tileNS::WIDTH;
+Tile::Tile(Game* game, Graphics* graphics) : 
+	direction(' '), game(game), graphics(graphics), orientation(0) {
+		this->collisionType     = entityNS::NONE;
+		this->graphic           = tileNS::GRAPHIC;
+		this->mass              = 1.0f;
+		this->spriteData.height = tileNS::HEIGHT;
+		this->spriteData.scale  = 1;
+		this->spriteData.width  = tileNS::WIDTH;
 
-	this->edge.bottom = tileNS::HEIGHT / 2;
-    this->edge.left = -tileNS::WIDTH/ 2;
-    this->edge.right = tileNS::WIDTH / 2;
-    this->edge.top = -tileNS::HEIGHT / 2;
+		this->edge.bottom = tileNS::HEIGHT / 2;
+		this->edge.left = -tileNS::WIDTH/ 2;
+		this->edge.right = tileNS::WIDTH / 2;
+		this->edge.top = -tileNS::HEIGHT / 2;
 
-	this->spriteData.rect.bottom = tileNS::HEIGHT / 2;
-    this->spriteData.rect.left = -tileNS::WIDTH / 2;
-    this->spriteData.rect.right = tileNS::WIDTH / 2;
-    this->spriteData.rect.top = -tileNS::HEIGHT / 2;
+		this->spriteData.rect.bottom = tileNS::HEIGHT / 2;
+		this->spriteData.rect.left = -tileNS::WIDTH / 2;
+		this->spriteData.rect.right = tileNS::WIDTH / 2;
+		this->spriteData.rect.top = -tileNS::HEIGHT / 2;
 }
 
 Tile::~Tile() {
@@ -73,6 +74,10 @@ char Tile::getDirection() {
 	return this->direction;
 }
 
+int Tile::getOrientation() {
+	return this->orientation;
+}
+
 void Tile::initialize() {
 //Initialize the graphic texture
 	if (!this->tm.initialize(this->graphics, this->graphic))
@@ -104,4 +109,13 @@ D3DXVECTOR2 Tile::intersectDepthVector(Entity &ent) {
 
 void Tile::setGraphic(string graphic) {
 	this->graphic = graphic;
+}
+
+void Tile::setOrientation(int orientation) {
+	if (orientation > 3 || orientation < 0) {
+		//throw Invalid_orientation_val();
+	} else {
+		this->orientation = orientation;
+		setCurrentFrame(orientation);
+	}
 }

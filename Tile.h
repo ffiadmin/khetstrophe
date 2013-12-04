@@ -12,8 +12,6 @@
 
 using std::string;
 
-class Cannot_use_Tile_default_constructor {};
-
 namespace tileNS {
 	const char GRAPHIC[] = "pictures\\tile.jpg";
 	const int  HEIGHT    = 64;
@@ -31,8 +29,10 @@ private :
 
 	D3DXVECTOR2 intersectDepthVector(Entity &ent);
 
+protected : 
+	int orientation; //current frame: 0 left, 1 up, 2 right, 3 down
+
 public : 
-	Tile() {throw Cannot_use_Tile_default_constructor();}
 	Tile(Game* game, Graphics* graphics);
 	virtual ~Tile();
 
@@ -42,8 +42,10 @@ public :
 	virtual bool collidesWithRight(Entity &ent, D3DXVECTOR2 &collisionVector);
 	virtual bool collidesWithTop(Entity &ent, D3DXVECTOR2 &collisionVector);
 	char getDirection();
+	int getOrientation();
 	virtual void initialize();
 	void setGraphic(string graphic);
+	void setOrientation(int orientation);
 };
 
 #endif
