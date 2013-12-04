@@ -6,7 +6,14 @@
 class Pyramid : public KhetPiece
 {
 public:
-	Pyramid::Pyramid(Game* game, Graphics* graphics, char color) : KhetPiece(game, graphics) { }
+	Pyramid::Pyramid(Game* game, Graphics* graphics, char color) : KhetPiece(game, graphics) 
+		{
+			setColor(color);
+			if (color = 'r')
+				setGraphic(MIRROR_RED);
+			else if (color = 'g')
+				setGraphic(MIRROR_GREY);
+		}
 
 	RESPONSE onCollision(int dir) // dir: 0 left, 1 up, 2 right, 3 down
 	{

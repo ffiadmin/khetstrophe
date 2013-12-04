@@ -98,12 +98,12 @@ public :
 	//Initialize the tiles
 		T* current;
 
-		for (int i = 0; i < X; ++i) {
-			for (int j = 0; j < Y; ++j) {
-				this->pieces[i][j] = g->next(this->game, this->graphics);
-				this->pieces[i][j]->initialize();
-				this->pieces[i][j]->setX(this->x + i * gridNS::PADDING + i * gridNS::WIDTH);
-				this->pieces[i][j]->setY(this->y + j * gridNS::PADDING + j * gridNS::HEIGHT);
+		for (int i = 0; i < Y; ++i) {
+			for (int j = 0; j < X; ++j) {
+				this->pieces[j][i] = g->next(this->game, this->graphics);
+				this->pieces[j][i]->initialize();
+				this->pieces[j][i]->setX(this->x + i * gridNS::PADDING + i * gridNS::WIDTH);
+				this->pieces[j][i]->setY(this->y + j * gridNS::PADDING + j * gridNS::HEIGHT);
 			}
 		}
 
