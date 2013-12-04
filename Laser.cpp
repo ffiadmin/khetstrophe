@@ -294,7 +294,7 @@ bool Laser::initialize() {
 	this->setVisible(false);
 
 	for (vector<Image>::iterator it = this->tailImages.begin(); it != this->tailImages.end(); ++it) {
-		it->initialize(this->graphics, 1, 1, 1, &tm);
+		it->initialize(this->graphics, laserNS::HEAD_WIDTH, laserNS::HEAD_HEIGHT, 1, &tm);
 		it->setX(laserNS::X);
 		it->setY(laserNS::Y);
 		it->setVisible(false);
