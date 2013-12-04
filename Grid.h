@@ -51,6 +51,8 @@ public :
 				delete this->pieces[i][j];
 			}
 		}
+
+		delete this->bkgSource;
 	}
 
 	void draw() {
@@ -91,7 +93,6 @@ public :
 		for (int i = 0; i < X; ++i) {
 			for (int j = 0; j < Y; ++j) {
 				this->pieces[i][j] = g->next(this->game, this->graphics);
-				this->pieces[i][j]->setGraphic("pictures\\tile.jpg");
 				this->pieces[i][j]->initialize();
 				this->pieces[i][j]->setX(this->x + i * gridNS::PADDING + i * gridNS::WIDTH);
 				this->pieces[i][j]->setY(this->y + j * gridNS::PADDING + j * gridNS::HEIGHT);

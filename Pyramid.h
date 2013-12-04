@@ -6,6 +6,8 @@
 class Pyramid : public KhetPiece
 {
 public:
+	Pyramid::Pyramid(Game* game, Graphics* graphics, char color) : KhetPiece(game, graphics) { }
+
 	RESPONSE onCollision(int dir) // dir: 0 left, 1 up, 2 right, 3 down
 	{
 		switch (Pyramid::getOrientation())

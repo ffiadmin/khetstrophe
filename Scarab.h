@@ -6,6 +6,8 @@
 class Scarab : public KhetPiece
 {
 public:
+	Scarab::Scarab(Game* game, Graphics* graphics, char color) : KhetPiece(game, graphics) { }
+
 	RESPONSE onCollision(int dir) // dir: 0 left, 1 up, 2 right, 3 down
 	{
 		switch (Scarab::getOrientation())

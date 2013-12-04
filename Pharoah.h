@@ -6,8 +6,7 @@
 class Pharoah : public KhetPiece
 {
 public:
-	Pharoah(Game* game, Graphics* graphics, char color) {
-		Tile(game, graphics);
+	Pharoah(Game* game, Graphics* graphics, char color) : KhetPiece(game, graphics) {
 		setColor(color);
 		if(color = 'r')
 			setGraphic(PHAROAH_RED);

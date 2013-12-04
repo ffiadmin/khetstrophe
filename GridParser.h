@@ -2,7 +2,6 @@
 #define GRID_PARSER_H
 
 #include <fstream>
-#include <map>
 #include <string>
 
 #include "EOFEncountered.h"
@@ -11,36 +10,27 @@
 #include "graphics.h"
 
 using std::ifstream;
-using std::map;
 using std::string;
 
 template <class T>
 class GridParser {
 protected : 
 	char current;
-	map<char, float> directions;
 	ifstream fin;
 
 public : 
 	GridParser(string file) throw(FileMissing) : fin(file) {
-	//Configure the directions map
-		this->directions['L'] = 0.0f;
-		this->directions['U'] = 90.0f;
-		this->directions['R'] = 180.0f;
-		this->directions['D'] = 270.0f;
-
-	//Now check if the file is open
 		if (!this->fin.is_open()) {
 			throw FileMissing("The text file is missing");
 		}
 	}
 
-	float configureDir() throw(EOFEncountered) {
+	int configureDir() throw(EOFEncountered) {
 		char awesome = this->fin.get();
 
 	//Good, this is a nice character
 		if (awesome != '\0' && !this->fin.eof()) {
-			return this->directions[awesome];
+			return awesome;
 		}
 
 	//Wait, end of line character
@@ -49,7 +39,7 @@ public :
 
 		//Good, we are just wrapping onto a new line
 			if (awesome != '\0') {
-				return this->directions[awesome];
+				return awesome;
 			}
 		}
 
