@@ -53,9 +53,9 @@ public :
 	}
 
 	void draw() {
-		if (this->bkgSource != '\0') {
-			this->background.draw();
-		}
+		//if (this->bkgSource != '\0') {
+		//	this->background.draw();
+		//}
 
 		for (int i = 0; i < X; ++i) {
 			for (int j = 0; j < Y; ++j) {
