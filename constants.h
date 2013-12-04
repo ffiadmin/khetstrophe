@@ -94,6 +94,8 @@ const char MENU_IMAGE[] =     "pictures\\menu.png";      // menu texture
     
     //board
 const char BOARD[] =          "pictures\\GameBoard.png";
+    //number grid
+const char NUM_GRID[] =       "pictures\\NumberGrid.png";
     //pieces
 const char ANUBIS_RED[] =     "pictures\\Anubis_Red.png";
 const char ANUBIS_GREY[] =   "pictures\\Anubis_White.png";

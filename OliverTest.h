@@ -18,6 +18,7 @@ private :
 	Tile* t;
 	Tile* t2;
 	Tile* tiles[10][10];
+    bool isTileSelected;
 
 public : 
 	OliverTest();
@@ -30,6 +31,7 @@ public :
     void render();
     void resetAll();
 	void update();
+    friend void gameEvent(Tile*);
 };
 
 #endif

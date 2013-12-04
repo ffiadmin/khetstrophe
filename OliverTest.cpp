@@ -20,6 +20,10 @@ void OliverTest::collisions() {
 	//}
 }
 
+void gameEvent(Tile *tile) {
+
+}
+
 void OliverTest::initialize(HWND hwnd) {
 	fireDeg1 = 90;
 	fireDeg2 = 270;
@@ -38,7 +42,7 @@ void OliverTest::initialize(HWND hwnd) {
 	this->kp = new KhetParser<Tile>("config\\classic.txt");
 
 //Create the Grid
-	this->g = new Grid<Tile, 10, 10>(this, graphics);
+	this->g = new Grid<Tile, 10, 10>(this, graphics, gameEvent);
 	this->g->setBkg("pictures\\GameBoard.png");
 	this->g->initialize(this->kp);
 
