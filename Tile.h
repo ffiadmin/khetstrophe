@@ -27,12 +27,12 @@ private :
 	TextureManager tm;
 
 	string graphic;
-
+	int numCols;
 	D3DXVECTOR2 intersectDepthVector(Entity &ent);
 
 protected : 
 	int orientation; //current frame: 0 left, 1 up, 2 right, 3 down
-
+	
 public : 
 	Tile(Game* game, Graphics* graphics);
 	virtual ~Tile();
@@ -45,7 +45,7 @@ public :
 	int getDirection();
 	int getOrientation();
 	virtual void initialize();
-	void setGraphic(string graphic);
+	void setGraphic(string graphic, int numCols);
 	void setOrientation(int orientation);
 };
 

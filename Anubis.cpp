@@ -2,11 +2,11 @@
 
 Anubis::Anubis(Game* game, Graphics* graphics, char color) : KhetPiece(game, graphics)
 {
-		setColor(color);
-		if(color == 'r')
-			setGraphic(ANUBIS_RED);
-		else if(color == 'g')
-			setGraphic(ANUBIS_GREY);
+	setColor(color);
+	if(color == 'r')
+		setGraphic(ANUBIS_RED, 2);
+	else if(color == 'g')
+		setGraphic(ANUBIS_GREY, 2);
 }
 
 RESPONSE Anubis::onCollision(int dir)

@@ -9,9 +9,9 @@ public:
 	Scarab::Scarab(Game* game, Graphics* graphics, char color) : KhetPiece(game, graphics) {
 		setColor(color);
 		if (color == 'r')
-			setGraphic(SCARAB_RED);
+			setGraphic(SCARAB_RED, 2);
 		else if (color == 'g')
-			setGraphic(SCARAB_GREY);
+			setGraphic(SCARAB_GREY, 2);
 	}
 
 	RESPONSE onCollision(int dir) // dir: 0 left, 1 up, 2 right, 3 down

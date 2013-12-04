@@ -9,9 +9,9 @@ public:
 	Sphinx(Game* game, Graphics* graphics, char color) : KhetPiece(game, graphics) {
 		setColor(color);
 		if(color == 'r')
-			setGraphic(SPHINX_RED);
+			setGraphic(SPHINX_RED, 2);
 		else if(color == 'g')
-			setGraphic(SPHINX_GREY);
+			setGraphic(SPHINX_GREY, 2);
 	}
 	RESPONSE onCollision(int dir) {return NOTHING;} // dir: 0 left, 1 up, 2 right, 3 down
 private:

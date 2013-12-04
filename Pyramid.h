@@ -10,9 +10,9 @@ public:
 		{
 			setColor(color);
 			if (color == 'r')
-				setGraphic(MIRROR_RED);
+				setGraphic(MIRROR_RED, 2);
 			else if (color == 'g')
-				setGraphic(MIRROR_GREY);
+				setGraphic(MIRROR_GREY, 2);
 		}
 
 	RESPONSE onCollision(int dir) // dir: 0 left, 1 up, 2 right, 3 down

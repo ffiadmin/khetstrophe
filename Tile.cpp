@@ -4,6 +4,7 @@ Tile::Tile(Game* game, Graphics* graphics) :
 	direction(' '), game(game), graphics(graphics), orientation(0) {
 		this->collisionType     = entityNS::NONE;
 		this->graphic           = tileNS::GRAPHIC;
+		this->numCols			= 1;
 		this->mass              = 1.0f;
 		this->spriteData.height = tileNS::HEIGHT;
 		this->spriteData.scale  = 1;
@@ -84,7 +85,7 @@ void Tile::initialize() {
 		throw GameError(gameErrorNS::FATAL_ERROR, "Could not initialize the Tile graphic");
 
 //Initialize the Tile object
-	Entity::initialize(this->game, tileNS::WIDTH, tileNS::HEIGHT, 1, &this->tm);
+	Entity::initialize(this->game, tileNS::WIDTH, tileNS::HEIGHT, numCols, &this->tm);
 }
 
 //THANK YOU SO MUCH!!!
@@ -107,8 +108,9 @@ D3DXVECTOR2 Tile::intersectDepthVector(Entity &ent) {
 	return D3DXVECTOR2(depthX, depthY);
 }
 
-void Tile::setGraphic(string graphic) {
+void Tile::setGraphic(string graphic, int numCols) {
 	this->graphic = graphic;
+	this->numCols = numCols;
 }
 
 void Tile::setOrientation(int orientation) {
