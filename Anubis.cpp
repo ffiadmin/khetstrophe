@@ -1,8 +1,7 @@
 #include "Anubis.h"
 
-Anubis::Anubis(Game* game, Graphics* graphics, char color)
+Anubis::Anubis(Game* game, Graphics* graphics, char color) : KhetPiece(game, graphics)
 {
-		Tile::Tile(game, graphics);
 		setColor(color);
 		if(color = 'r')
 			setGraphic(ANUBIS_RED);

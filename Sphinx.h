@@ -6,8 +6,7 @@
 class Sphinx : public KhetPiece
 {
 public:
-	Sphinx(Game* game, Graphics* graphics, char color) {
-		Tile(game, graphics);
+	Sphinx(Game* game, Graphics* graphics, char color) : KhetPiece(game, graphics) {
 		setColor(color);
 		if(color = 'r')
 			setGraphic(SPHINX_RED);
