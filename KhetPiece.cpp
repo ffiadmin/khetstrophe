@@ -3,22 +3,26 @@
 void KhetPiece::rotate(int dir)
 {
 	if(dir == 1)
-		setCurrentFrame(getCurrentFrame()+1);
+		orientation++;
 	else if(dir == 0)
-		setCurrentFrame(getCurrentFrame()-1);
+		orientation--;
 	else
 		throw Invalid_rotation_dir_argument();
 
-	if(getCurrentFrame() < 0)
-		setCurrentFrame(3);
-	else if(getCurrentFrame() > 3)
-		setCurrentFrame(0);
+	if(orientation < 0)
+		orientation = 3;
+	else if(orientation > 3)
+		orientation = 0;
+
+	setCurrentFrame(orientation);
 }
 
 void KhetPiece::setOrientation(int newOrientation)
 {
 	if(newOrientation > 3 || newOrientation < 0)
 		throw Invalid_orientation_val();
-	else
+	else {
 		orientation = newOrientation;
+		setCurrentFrame(orientation);
+	}
 }
