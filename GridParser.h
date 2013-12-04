@@ -44,7 +44,7 @@ public :
 		}
 
 	//We either hit an EOF or are going into a new section
-		throw EOFEncountered("The end of the file was reached or the parser is moving onto another section");
+		//throw EOFEncountered("The end of the file was reached or the parser is moving onto another section");
 	}
 
 	virtual T* configureTypes(char type, Game* game, Graphics* graphics) = 0;
@@ -68,7 +68,7 @@ public :
 		}
 
 	//We either hit an EOF or are going into a new section
-		throw EOFEncountered("The end of the file was reached or the parser is moving onto another section");
+		//throw EOFEncountered("The end of the file was reached or the parser is moving onto another section");
 	}
 };
 
