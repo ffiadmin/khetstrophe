@@ -61,6 +61,51 @@ void Laser::activate(float x, float y) {
 }
 
 /**
+ * DEGREE MODE
+ *
+ * Change the direction of the laser while it is in motion, without
+ * changing its location. The laser must have been already fired and 
+ * active. This will not fire the laser if it is inactive.
+ *
+ * This method follows the standards of the cartesian corrdinate system,
+ * where an angle of 0 degrees will point along the positive X axis, 90
+ * degrees will point along the positive Y axis, 180 degrees will point
+ * along the negative X axis, etc...
+ *
+ * @access public
+ * @param  float  angle The angle to fire the laser, in degrees
+ * @return void
+*/
+
+void Laser::changeDirDeg(float angle) {
+//Calculate the angle of the velocity vector
+	this->velocity.x = laserNS::VELOCITY * sin(static_cast<float>(PI) / 180.0f * (90.0f + angle));
+	this->velocity.y = laserNS::VELOCITY * cos(static_cast<float>(PI) / 180.0f * (90.0f + angle));
+}
+/**
+ * RADIAN MODE
+ *
+ * Change the direction of the laser while it is in motion, without
+ * changing its location. The laser must have been already fired and 
+ * active. This will not fire the laser if it is inactive.
+ *
+ * This method follows the standards of the cartesian corrdinate system,
+ * where an angle of 0 degrees will point along the positive X axis, 90
+ * degrees will point along the positive Y axis, 180 degrees will point
+ * along the negative X axis, etc...
+ *
+ * @access public
+ * @param  float  angle The angle to fire the laser, in degrees
+ * @return void
+*/
+
+void Laser::changeDirRad(float angle) {
+//Calculate the angle of the velocity vector
+	this->velocity.x = laserNS::VELOCITY * sin(static_cast<float>(PI) / 2.0f + angle);
+	this->velocity.y = laserNS::VELOCITY * cos(static_cast<float>(PI) / 2.0f + angle);
+}
+
+/**
  * Determines whether or not the laser should self destruct.
  *
  * @access private

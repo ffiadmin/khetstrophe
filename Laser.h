@@ -74,6 +74,8 @@ public :
 
 	Laser(Game* game, Graphics* graphics, DWORD color = Laser::COLOR_RED);
 
+	void changeDirDeg(float angle);
+	void changeDirRad(float angle);
 	void destroy();
 	void draw();
 	void fireDeg(float x, float y, float angle);
