@@ -34,8 +34,12 @@ void OliverTest::initialize(HWND hwnd) {
 	l2->initialize();
 	l2->setSelfDestructMethod(Laser::TIMER_DESTROY, 5000);
 
+//Create the GridParser
+	this->kp = new KhetParser<Tile>("config\\classic.txt");
+
+//Create the Grid
 	this->g = new Grid<Tile, 10, 10>(this, this->graphics);
-	this->g->initialize();
+	this->g->initialize(this->kp);
 
 	//t = new Tile(this, graphics);
 	//t->setGraphic("pictures\\tile-white.jpg");

@@ -3,6 +3,7 @@
 
 #include "game.h"
 #include "Grid.h"
+#include "KhetParser.h"
 #include "Laser.h"
 #include "Tile.h"
 
@@ -11,6 +12,7 @@ private :
 	char dir;
 	float fireDeg1, fireDeg2;
 	Grid<Tile, 10, 10>* g;
+	KhetParser<Tile>* kp;
 	Laser* l;
 	Laser* l2;
 	Tile* t;

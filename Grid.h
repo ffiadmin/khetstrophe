@@ -4,6 +4,7 @@
 #include "game.h"
 #include "gameError.h"
 #include "graphics.h"
+#include "GridParser.h"
 #include "image.h"
 #include "textureManager.h"
 #include "Tile.h"
@@ -68,7 +69,7 @@ public :
 		return this->pieces[x][y];
 	}
 
-	void initialize() {
+	void initialize(GridParser<T>* g) {
 	//Initialize the background
 	/*	if (this->bkgSource != '\0') {
 			int height = gridNS::PADDING + Y * gridNS::HEIGHT;
@@ -89,7 +90,7 @@ public :
 
 		for (int i = 0; i < X; ++i) {
 			for (int j = 0; j < Y; ++j) {
-				this->pieces[i][j] = new T(this->game, this->graphics);
+				this->pieces[i][j] = g->next(this->game, this->graphics);
 				this->pieces[i][j]->setGraphic("pictures\\tile.jpg");
 				this->pieces[i][j]->initialize();
 				this->pieces[i][j]->setX(this->x + gridNS::PADDING + i * gridNS::WIDTH);
