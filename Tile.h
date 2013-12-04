@@ -14,7 +14,7 @@
 using std::string;
 
 namespace tileNS {
-	const char GRAPHIC[] = "pictures\\tile.jpg";
+	const char GRAPHIC[] = "pictures\\tile.png";
 	const int  HEIGHT    = 64;
 	const int  WIDTH     = 64;
 }
