@@ -27,10 +27,16 @@ public :
 
 	int configureDir() throw(EOFEncountered) {
 		char awesome = this->fin.get();
+		int retVal;
 
 	//Good, this is a nice character
 		if (awesome != '\n' && !this->fin.eof()) {
-			return static_cast<int>(awesome);
+			if (awesome == ' ') {
+				return 0;
+			} else {
+				retVal = awesome - '0';
+				return retVal;
+			}
 		}
 
 	//Wait, end of line character
@@ -38,8 +44,13 @@ public :
 			awesome = this->fin.get();
 
 		//Good, we are just wrapping onto a new line
-			if (awesome != '\n') {
-				return static_cast<int>(awesome);
+				if (awesome != '\n') {
+					if (awesome == ' ') {
+					return 0;
+				} else {
+					retVal = awesome - '0';
+					return retVal;
+				}
 			}
 		}
 

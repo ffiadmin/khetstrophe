@@ -6,16 +6,14 @@ P p ss P p
       P   
        p  
   paha   x
-
-D   DDDD  
-  L       
-   U      
-R L UR D U
-D U LD R L
-      D   
-       R  
-  UUUU   U
-
+3   3333  
+  0       
+   1      
+2 0 12 3 1
+3 1 03 2 0
+      3   
+       2  
+  1111   1
 R   RRRR  
   R       
    W      

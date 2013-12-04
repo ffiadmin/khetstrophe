@@ -109,7 +109,8 @@ public :
 
 		for (int i = 0; i < X; ++i) {
 			for (int j = 0; j < Y; ++j) {
-				this->pieces[i][j]->setDegrees(g->configureDir());
+				//this->pieces[i][j]->setOrientation(g->configureDir());
+				this->pieces[i][j]->setOrientation(0);
 			}
 		}
 	}
