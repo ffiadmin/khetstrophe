@@ -96,15 +96,15 @@ const char MENU_IMAGE[] =     "pictures\\menu.png";      // menu texture
 const char BOARD[] =          "pictures\\GameBoard.png";
     //pieces
 const char ANUBIS_RED[] =     "pictures\\Anubis_Red.png";
-const char ANUBIS_WHITE[] =   "pictures\\Anubis_White.png";
+const char ANUBIS_GREY[] =   "pictures\\Anubis_White.png";
 const char MIRROR_RED[] =     "pictures\\Mirror_Red.png";
-const char MIRROR_WHITE[] =   "pictures\\Mirror_White.png";
+const char MIRROR_GREY[] =   "pictures\\Mirror_White.png";
 const char PHAROAH_RED[] =    "pictures\\Pharoah_Red.png";
-const char PHAROAH_WHITE[] =  "pictures\\Pharoah_White.png";
+const char PHAROAH_GREY[] =  "pictures\\Pharoah_White.png";
 const char SCARAB_RED[] =     "pictures\\Scarab_Red.png";
-const char SCARAB_WHITE[] =   "pictures\\Scarab_White.png";
+const char SCARAB_GREY[] =   "pictures\\Scarab_White.png";
 const char SPHINX_RED[] =     "pictures\\Sphinx_Red.png";
-const char SPHINX_WHITE[] =   "pictures\\Sphinx_White.png";
+const char SPHINX_GREY[] =   "pictures\\Sphinx_White.png";
 
 
 
