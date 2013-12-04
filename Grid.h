@@ -16,9 +16,9 @@ using std::string;
 using std::vector;
 
 namespace gridNS {
-	const int PADDING = 5;
-	const int HEIGHT  = 48;
-	const int WIDTH   = 48;
+	const int PADDING = 0;
+	const int HEIGHT  = 64;
+	const int WIDTH   = 64;
 }
 
 template <class T, int X, int Y>
