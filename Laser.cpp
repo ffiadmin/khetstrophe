@@ -369,20 +369,28 @@ void Laser::update(float frameTime) {
 			this->spriteData.x = GAME_WIDTH - laserNS::HEAD_WIDTH;
 			this->velocity.x = -this->velocity.x;
 			++this->collisions;
+			
+			this->destroy();
 		} else if (this->spriteData.x < 0) {                           // Left edge
 			this->spriteData.x = 0;
 			this->velocity.x = -this->velocity.x;
 			++this->collisions;
+
+			this->destroy();
 		}
 
 		if (this->spriteData.y > GAME_HEIGHT - laserNS::HEAD_HEIGHT) { // Bottom edge
 			this->spriteData.y = GAME_HEIGHT - laserNS::HEAD_HEIGHT;
 			this->velocity.y = -this->velocity.y;
 			++this->collisions;
+
+			this->destroy();
 		} else if (spriteData.y < 0) {                                 // Top edge
 			this->spriteData.y = 0;
 			this->velocity.y = -this->velocity.y;
 			++this->collisions;
+
+			this->destroy();
 		}
 	} else {
 		if (++this->destroyCounter == laserNS::TAIL) {
