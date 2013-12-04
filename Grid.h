@@ -16,7 +16,7 @@ using std::string;
 using std::vector;
 
 namespace gridNS {
-	const int PADDING = 0;
+	const int PADDING = 5;
 	const int HEIGHT  = 48;
 	const int WIDTH   = 48;
 }
@@ -24,7 +24,7 @@ namespace gridNS {
 template <class T, int X, int Y>
 class Grid {
 private : 
-	Image* background;
+	Image background;
 	TextureManager backgroundTM;
 	Game* game;
 	Graphics* graphics;
@@ -54,9 +54,9 @@ public :
 	}
 
 	void draw() {
-		//if (this->bkgSource != '\0') {
-		//	this->background.draw();
-		//}
+		if (this->bkgSource != '\0') {
+			this->background.draw();
+		}
 
 		for (int i = 0; i < X; ++i) {
 			for (int j = 0; j < Y; ++j) {
@@ -71,12 +71,12 @@ public :
 
 	void initialize(GridParser<T>* g) {
 	//Initialize the background
-	/*	if (this->bkgSource != '\0') {
-			int height = gridNS::PADDING + Y * gridNS::HEIGHT;
-			int width = gridNS::PADDING + X * gridNS::WIDTH;
+		if (this->bkgSource != '\0') {
+			int height = Y * gridNS::PADDING + Y * gridNS::HEIGHT;
+			int width = X * gridNS::PADDING + X * gridNS::WIDTH;
 
 			if (!this->backgroundTM.initialize(this->graphics, this->bkgSource))
-				throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing the grid backgound texture"));
+				throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing the grid background texture"));
 
 			if (!this->background.initialize(this->graphics, width, height, 0, &this->backgroundTM))
 				throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing the grid backgound"));
@@ -84,7 +84,7 @@ public :
 			this->background.setX(this->x);
 			this->background.setY(this->y);
 		}
-		*/
+		
 	//Initialize the tiles
 		T* current;
 
@@ -93,8 +93,14 @@ public :
 				this->pieces[i][j] = g->next(this->game, this->graphics);
 				this->pieces[i][j]->setGraphic("pictures\\tile.jpg");
 				this->pieces[i][j]->initialize();
-				this->pieces[i][j]->setX(this->x + gridNS::PADDING + i * gridNS::WIDTH);
-				this->pieces[i][j]->setY(this->y + gridNS::PADDING + j * gridNS::HEIGHT);
+				this->pieces[i][j]->setX(this->x + i * gridNS::PADDING + i * gridNS::WIDTH);
+				this->pieces[i][j]->setY(this->y + j * gridNS::PADDING + j * gridNS::HEIGHT);
+			}
+		}
+
+		for (int i = 0; i < X; ++i) {
+			for (int j = 0; j < Y; ++j) {
+				this->pieces[i][j]->setDegrees(g->configureDir());
 			}
 		}
 	}
@@ -125,20 +131,20 @@ public :
 		to = temp;
 	}
 
-	void update(int frameTime) {
-		/*if (this->bkgSource != '\0') {
+	void update(float frameTime) {
+		if (this->bkgSource != '\0') {
 			this->background.setX(this->x);
 			this->background.setY(this->y);
-			this->background.update();
-		}*/
+			this->background.update(frameTime);
+		}
 
 		T* current;
 
 		for (int i = 0; i < X; ++i) {
 			for (int j = 0; j < Y; ++j) {
 				current = this->pieces[i][j];
-				current->setX(this->x + gridNS::PADDING + i * gridNS::WIDTH);
-				current->setY(this->y + gridNS::PADDING + j * gridNS::HEIGHT);
+				current->setX(this->x + i * gridNS::PADDING + i * gridNS::WIDTH);
+				current->setY(this->y + j * gridNS::PADDING + j * gridNS::HEIGHT);
 				current->update(frameTime);
 			}
 		}

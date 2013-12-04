@@ -35,7 +35,7 @@ public :
 		}
 	}
 
-	float configureDir(char dir) throw(EOFEncountered) {
+	float configureDir() throw(EOFEncountered) {
 		char awesome = this->fin.get();
 
 	//Good, this is a nice character

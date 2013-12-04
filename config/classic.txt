@@ -1,0 +1,26 @@
+X   AHAP  
+  P       
+   P      
+P P SS P P
+P P SS P P
+      P   
+       P  
+  PAHA   X
+
+D   DDDD  
+  L       
+   U      
+R L UR D U
+D U LD R L
+      D   
+       R  
+  UUUU   U
+
+R   RRRR  
+  R       
+   W      
+R W RR R W
+R W WW R W
+      R   
+       W  
+  WWWW   W
