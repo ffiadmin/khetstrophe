@@ -70,7 +70,7 @@ public :
 
 	void initialize() {
 	//Initialize the background
-		if (this->bkgSource != '\0') {
+	/*	if (this->bkgSource != '\0') {
 			int height = gridNS::PADDING + Y * gridNS::HEIGHT;
 			int width = gridNS::PADDING + X * gridNS::WIDTH;
 
@@ -83,7 +83,7 @@ public :
 			this->background.setX(this->x);
 			this->background.setY(this->y);
 		}
-
+		*/
 	//Initialize the tiles
 		T* current;
 
@@ -125,11 +125,11 @@ public :
 	}
 
 	void update(int frameTime) {
-		if (this->bkgSource != '\0') {
+		/*if (this->bkgSource != '\0') {
 			this->background.setX(this->x);
 			this->background.setY(this->y);
 			this->background.update();
-		}
+		}*/
 
 		T* current;
 
