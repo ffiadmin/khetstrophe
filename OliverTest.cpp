@@ -39,7 +39,7 @@ void OliverTest::initialize(HWND hwnd) {
 
 //Create the Grid
 	this->g = new Grid<Tile, 10, 10>(this, graphics);
-	this->g->setBkg("pictures\\bkg-test.jpg");
+	this->g->setBkg("pictures\\GameBoard.png");
 	this->g->initialize(this->kp);
 
 	//t = new Tile(this, graphics);
