@@ -9,9 +9,9 @@ public:
 	Pyramid::Pyramid(Game* game, Graphics* graphics, char color) : KhetPiece(game, graphics) 
 		{
 			setColor(color);
-			if (color = 'r')
+			if (color == 'r')
 				setGraphic(MIRROR_RED);
-			else if (color = 'g')
+			else if (color == 'g')
 				setGraphic(MIRROR_GREY);
 		}
 

@@ -8,9 +8,9 @@ class Scarab : public KhetPiece
 public:
 	Scarab::Scarab(Game* game, Graphics* graphics, char color) : KhetPiece(game, graphics) {
 		setColor(color);
-		if (color = 'r')
+		if (color == 'r')
 			setGraphic(SCARAB_RED);
-		else if (color = 'g')
+		else if (color == 'g')
 			setGraphic(SCARAB_GREY);
 	}
 
