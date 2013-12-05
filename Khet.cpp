@@ -235,19 +235,15 @@ case PLAY:
 		    {
 		    case 0: //left
 			    l->fireDeg((*grid)[shootX][shootY]->getCenterX()-32, (*grid)[shootX][shootY]->getCenterY(), 180.0f);
-			    //l->fireDeg(32.0f, 64.0f, 180.0f);
 			    break;
 		    case 1: //up
 			    l->fireDeg((*grid)[shootX][shootY]->getCenterX(), (*grid)[shootX][shootY]->getCenterY()-40, 90.0f);
-			    //l->fireDeg(32.0f, 64.0f, 90.0f);
 			    break;
 		    case 2: //right
 			    l->fireDeg((*grid)[shootX][shootY]->getCenterX()+32, (*grid)[shootX][shootY]->getCenterY(), 0.0f);
-			    //l->fireDeg(32.0f, 64.0f, 0.0f);
 			    break;
 		    case 3: //down
 			    l->fireDeg((*grid)[shootX][shootY]->getCenterX(), (*grid)[shootX][shootY]->getCenterY()+32, 270.0f);
-			    //l->fireDeg(32.0f, 64.0f, 270.0f);
 		    }
 		    //change player
 		    if(turn == 'g')
