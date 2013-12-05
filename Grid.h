@@ -5,7 +5,6 @@
 *   Description: This file defines the Grid class which can be ported to other games easily  
 */
 
-#ifndef GRID_H
 #define GRID_H
 
 #include "game.h"
@@ -141,7 +140,7 @@ public :
 	}
 
 	void swap(int fromX, int fromY, int toX, int toY) {
-		T temp = this->pieces[fromX][fromY];
+		T* temp = this->pieces[fromX][fromY];
 		
 		this->pieces[fromX][fromY] = this->pieces[toX][toY];
 		this->pieces[toX][toY] = temp;

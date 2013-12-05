@@ -102,37 +102,63 @@ void Khet::update() {
 		active.tile = (*grid)[active.x][active.y];
 
 		if (active.tile->getColor() == turn && active.tile->getActive()) {
-			step = 2;
+			step++;
 			activeSelected = true;
 		} else {
 			MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
 		}
-
-		
 	}
 
 //Move or rotate
 	if (activeSelected) {
 		if (input->isKeyDown('1')) {
-			MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
+			g->swap(active.x, active.y, active.x-1, active.y-1);
+			activeSelected = false;
+			step++;
 		} else if (input->isKeyDown('2')) {
-			MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
+			g->swap(active.x, active.y, active.x, active.y-1);
+			activeSelected = false;
+			step++;
 		} else if (input->isKeyDown('3')) {
-			MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
+			g->swap(active.x, active.y, active.x+1, active.y-1);
+			activeSelected = false;
+			step++;
 		} else if (input->isKeyDown('4')) {
-			MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
+			g->swap(active.x, active.y, active.x-1, active.y);
+			activeSelected = false;
+			step++;
 		} else if (input->isKeyDown('6')) {
-			MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
+			g->swap(active.x, active.y, active.x+1, active.y);
+			activeSelected = false;
+			step++;
 		} else if (input->isKeyDown('7')) {
-			MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
+			g->swap(active.x, active.y, active.x-1, active.y+1);
+			activeSelected = false;
+			step++;
 		} else if (input->isKeyDown('8')) {
-			MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
+			g->swap(active.x, active.y, active.x, active.y+1);
+			activeSelected = false;
+			step++;
 		} else if (input->isKeyDown('9')) {
-			MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
+			g->swap(active.x, active.y, active.x+1, active.y+1);
+			activeSelected = false;
+			step++;
 		} else if (input->isKeyDown(VK_LEFT)) {
-			MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
+			active.tile->setOrientation(active.tile->getOrientation()-1);
+			activeSelected = false;
+			step++;
 		} else if (input->isKeyDown(VK_RIGHT)) {
-			MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
+			active.tile->setOrientation(active.tile->getOrientation()+1);
+			activeSelected = false;
+			step++;
+		}
+	}
+
+//Fire!!
+	if (!activeSelected && step > 4) {
+		if (turn == 'g') {
+			l->fireDeg(32.0f, 64.0f, 270.0f);
+
 		}
 	}
 }
