@@ -107,6 +107,7 @@ const char INSTRUCTIONS_IMG[] =       "pictures\\Rules.png";
 
     //pieces_types
 const char PIECES_IMG[] =       "pictures\\Pieces.png";
+const char CONTROLS_IMG[] = "pictures\\Controls.png";
 
 //pieces
 const char ANUBIS_RED[] =     "pictures\\Anubis_Red.png";
@@ -120,7 +121,7 @@ const char SCARAB_GREY[] =   "pictures\\Scarab_White.png";
 const char SPHINX_RED[] =     "pictures\\Sphinx_Red.png";
 const char SPHINX_GREY[] =   "pictures\\Sphinx_White.png";
 
-enum GAMESTATE{PIECES,INSTRUCTIONS,PLAY,END};
+enum GAMESTATE{PIECES,INSTRUCTIONS,CONTROLS,PLAY,END};
 
 
 // audio files required by audio.cpp

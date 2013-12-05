@@ -32,10 +32,12 @@ private :
 	Image numGrid;
     Image rules;
     Image pieceInfo;
+	Image controls;
     
     TextureManager numGridTexture;
     TextureManager instructionsTexture;
     TextureManager piecesTexture;
+	TextureManager controlsTexture;
 public : 
 	Khet();
 	~Khet();
