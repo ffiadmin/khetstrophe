@@ -5,11 +5,10 @@
 *   Description: This file implements the Tile class  
 */
 
-
 #include "Tile.h"
 
 Tile::Tile(Game* game, Graphics* graphics) : 
-	direction(' '), game(game), graphics(graphics), orientation(0) {
+	direction(-1), game(game), graphics(graphics), orientation(0) {
 		this->collisionType     = entityNS::NONE;
 		this->graphic           = tileNS::GRAPHIC;
 		this->numCols			= 1;
@@ -39,27 +38,32 @@ bool Tile::collidesWith(Entity &ent, D3DXVECTOR2 &collisionVector) {
 
 //Store the side of the collision on the Tile
 	if (collide) {
-		D3DXVECTOR2 v = this->intersectDepthVector(ent);
-		float absX = fabsf(v.x);
-		float absY = fabsf(v.y);
+		//D3DXVECTOR2 v = this->intersectDepthVector(ent);
+		//float absX = fabsf(v.x);
+		//float absY = fabsf(v.y);
+		D3DXVECTOR2 vel = ent.getVelocity();
+		int x = static_cast<int>(vel.x);
+		int y = static_cast<int>(vel.y);
 
-		if (this->direction == ' ') {
-			if (absX > absY) {
-				if (v.y < 0.0f) {
-					this->direction = 3;
-				} else {
-					this->direction = 1;
-				}
-			} else {
-				if (v.x < 0.0f) {
-					this->direction = 2;
-				} else {
-					this->direction = 0;
-				}
+		if (this->direction == -1) {
+			if (x > 0) {
+				this->direction = 0; //LEFT
+				return collide;
+			} else if (x < 0) {
+				this->direction = 2; //RIGHT
+				return collide;
+			}
+
+			if (y > 0) {
+				this->direction = 3; //DOWN
+				return collide;
+			} else if (y < 0) {
+				this->direction = 1; //UP
+				return collide;
 			}
 		}
 	} else {
-		this->direction = ' ';
+		this->direction = -1;
 	}
 
 	return collide;
@@ -70,11 +74,11 @@ bool Tile::collidesWithBottom(Entity &ent, D3DXVECTOR2 &collisionVector) {
 }
 
 bool Tile::collidesWithLeft(Entity &ent, D3DXVECTOR2 &collisionVector) {
-	return Tile::collidesWith(ent, collisionVector) && this->direction == 2;
+	return Tile::collidesWith(ent, collisionVector) && this->direction == 0;
 }
 
 bool Tile::collidesWithRight(Entity &ent, D3DXVECTOR2 &collisionVector) {
-	return Tile::collidesWith(ent, collisionVector) && this->direction == 3;
+	return Tile::collidesWith(ent, collisionVector) && this->direction == 2;
 }
 
 bool Tile::collidesWithTop(Entity &ent, D3DXVECTOR2 &collisionVector) {

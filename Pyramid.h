@@ -30,13 +30,13 @@ public:
 			switch (dir)
 			{
 			case 0:
-				return DESTROY;
-			case 1:
-				return DESTROY;
-			case 2:
 				return UP;
-			case 3:
+			case 1:
 				return LEFT;
+			case 2:
+				return DESTROY;
+			case 3:
+				return DESTROY;
 			default:
 				return NOTHING;
 			}
@@ -45,13 +45,13 @@ public:
 			switch (dir)
 			{
 			case 0:
-				return UP;
+				return DESTROY;
 			case 1:
-				return DESTROY;
+				return RIGHT;
 			case 2:
-				return DESTROY;
+				return UP;
 			case 3:
-				return RIGHT;	
+				return DESTROY;	
 			default:
 				return NOTHING;
 			}
@@ -60,13 +60,13 @@ public:
 			switch (dir)
 			{
 			case 0:
-				return DOWN;
+				return DESTROY;
 			case 1:
-				return RIGHT;
+				return DESTROY;
 			case 2:
-				return DESTROY;
+				return DOWN;
 			case 3:
-				return DESTROY;
+				return RIGHT;
 			default:
 				return NOTHING;
 			}
@@ -75,13 +75,13 @@ public:
 			switch (dir)
 			{
 			case 0:
-				return DESTROY;
-			case 1:
-				return LEFT;
-			case 2:
 				return DOWN;
-			case 3:
+			case 1:
 				return DESTROY;
+			case 2:
+				return DESTROY;
+			case 3:
+				return LEFT;
 			default:
 				return NOTHING;
 			}
