@@ -26,37 +26,37 @@ public :
 
 		switch(type) {
 			case 'A' : 
-				returnVal = new Anubis(game, graphics, 'r');
-				break;
-			case 'a' : 
 				returnVal = new Anubis(game, graphics, 'g');
 				break;
-			case 'H' : 
-				returnVal = new Pharoah(game, graphics, 'r');
+			case 'a' : 
+				returnVal = new Anubis(game, graphics, 'r');
 				break;
-			case 'h' : 
+			case 'H' : 
 				returnVal = new Pharoah(game, graphics, 'g');
 				break;
-			case 'P' : 
-				returnVal = new Pyramid(game, graphics, 'r');
+			case 'h' : 
+				returnVal = new Pharoah(game, graphics, 'r');
 				break;
-			case 'p' : 
+			case 'P' : 
 				returnVal = new Pyramid(game, graphics, 'g');
 				break;
-			case 'S' : 
-				returnVal = new Scarab(game, graphics, 'r');
+			case 'p' : 
+				returnVal = new Pyramid(game, graphics, 'r');
 				break;
-			case 's' : 
+			case 'S' : 
 				returnVal = new Scarab(game, graphics, 'g');
 				break;
-			case 'X' : 
-				returnVal = new Sphinx(game, graphics, 'r');
+			case 's' : 
+				returnVal = new Scarab(game, graphics, 'r');
 				break;
-			case 'x' : 
+			case 'X' : 
 				returnVal = new Sphinx(game, graphics, 'g');
 				break;
+			case 'x' : 
+				returnVal = new Sphinx(game, graphics, 'r');
+				break;
 			default : 
-				returnVal = new Anubis(game, graphics, 'r');
+				returnVal = new Anubis(game, graphics, 'g');
 				returnVal->setActive(false);
 				returnVal->setVisible(false);
 				break;

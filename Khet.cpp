@@ -222,7 +222,7 @@ case PLAY:
 
 	    if (!activeSelected && step == 3) {
 		    int shootX, shootY;	
-		    if (turn == 'g') {
+		    if (turn == 'r') {
 			    shootX = X-1;
 			    shootY = Y-1;
 		    }
