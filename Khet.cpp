@@ -54,6 +54,8 @@ void Khet::collisions() {
 				case DESTROY:
 					t->setActive(false);
 					t->setVisible(false);
+					if(t->getName() == 'H')
+						gamestate = END;
 				case NOTHING:
 					this->l->destroy();
 				}
@@ -114,6 +116,9 @@ void Khet::render() {
     case INSTRUCTIONS:
         rules.draw();
         break;
+	case CONTROLS:
+		controls.draw();
+		break;
     case PLAY:
         this->g->draw();
 	    l->draw();
@@ -138,6 +143,12 @@ case PIECES:
     }
     break;
 case INSTRUCTIONS:
+	if (this->input->getMouseLButton() && clickedThisFrame == false) {
+        gamestate = CONTROLS;
+        clickedThisFrame = true;
+    }
+    break;
+case CONTROLS:
     if (this->input->getMouseLButton() && clickedThisFrame == false) {
         gamestate = PLAY;
         clickedThisFrame = true;
