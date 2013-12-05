@@ -127,7 +127,7 @@ void Khet::update() {
 		active.tile = (*grid)[active.x][active.y];
 
 		if (active.tile->getColor() == turn && active.tile->getActive()) {
-			step++;
+			step = 2;
 			activeSelected = true;
 		} else {
 			MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
@@ -139,51 +139,83 @@ void Khet::update() {
 		if (input->isKeyDown('1')) {
 			g->swap(active.x, active.y, active.x-1, active.y-1);
 			activeSelected = false;
-			step++;
+			step = 3;
 		} else if (input->isKeyDown('2')) {
 			g->swap(active.x, active.y, active.x, active.y-1);
 			activeSelected = false;
-			step++;
+			step = 3;
 		} else if (input->isKeyDown('3')) {
 			g->swap(active.x, active.y, active.x+1, active.y-1);
 			activeSelected = false;
-			step++;
+			step = 3;
 		} else if (input->isKeyDown('4')) {
 			g->swap(active.x, active.y, active.x-1, active.y);
 			activeSelected = false;
-			step++;
+			step = 3;
 		} else if (input->isKeyDown('6')) {
 			g->swap(active.x, active.y, active.x+1, active.y);
 			activeSelected = false;
-			step++;
+			step = 3;
 		} else if (input->isKeyDown('7')) {
 			g->swap(active.x, active.y, active.x-1, active.y+1);
 			activeSelected = false;
-			step++;
+			step = 3;
 		} else if (input->isKeyDown('8')) {
 			g->swap(active.x, active.y, active.x, active.y+1);
 			activeSelected = false;
-			step++;
+			step = 3;
 		} else if (input->isKeyDown('9')) {
 			g->swap(active.x, active.y, active.x+1, active.y+1);
 			activeSelected = false;
-			step++;
+			step = 3;
 		} else if (input->isKeyDown(VK_LEFT)) {
 			active.tile->setOrientation(active.tile->getOrientation()-1);
 			activeSelected = false;
-			step++;
+			step = 3;
 		} else if (input->isKeyDown(VK_RIGHT)) {
 			active.tile->setOrientation(active.tile->getOrientation()+1);
 			activeSelected = false;
-			step++;
+			step = 3;
 		}
 	}
 
 //Fire!!
-	if (!activeSelected && step > 4) {
-		if (turn == 'g') {
-			l->fireDeg(32.0f, 64.0f, 270.0f);
 
+	if (!activeSelected && step == 3) {
+		int shootX, shootY;	
+		if (turn == 'g') {
+			shootX = X-1;
+			shootY = Y-1;
 		}
+		else {
+			shootX = 0;
+			shootY = 0;
+		}
+
+		switch((*grid)[shootX][shootY]->getOrientation())
+		{
+		case 0: //left
+			l->fireDeg((*grid)[shootX][shootY]->getCenterX()-32, (*grid)[shootX][shootY]->getCenterY(), 180.0f);
+			//l->fireDeg(32.0f, 64.0f, 180.0f);
+			break;
+		case 1: //up
+			l->fireDeg((*grid)[shootX][shootY]->getCenterX(), (*grid)[shootX][shootY]->getCenterY()-40, 90.0f);
+			//l->fireDeg(32.0f, 64.0f, 90.0f);
+			break;
+		case 2: //right
+			l->fireDeg((*grid)[shootX][shootY]->getCenterX()+32, (*grid)[shootX][shootY]->getCenterY(), 0.0f);
+			//l->fireDeg(32.0f, 64.0f, 0.0f);
+			break;
+		case 3: //down
+			l->fireDeg((*grid)[shootX][shootY]->getCenterX(), (*grid)[shootX][shootY]->getCenterY()+32, 270.0f);
+			//l->fireDeg(32.0f, 64.0f, 270.0f);
+		}
+		//change player
+		if(turn == 'g')
+			turn = 'r';
+		else
+			turn = 'g';
+
+		step = 1;
 	}
 }
