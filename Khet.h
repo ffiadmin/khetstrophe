@@ -16,9 +16,11 @@
 
 class Khet : public Game {
 private : 
-	Grid<KhetPiece, X, Y>* g;
+    Grid<KhetPiece, X, Y>* g;
 	KhetParser<KhetPiece>* kp;
 	Laser* l;
+
+    GAMESTATE gamestate;
 
 	int step;
 	char turn;
@@ -28,8 +30,12 @@ private :
     bool clickedThisFrame;
 
 	Image numGrid;
-      TextureManager numGridTexture;
-
+    Image rules;
+    Image pieceInfo;
+    
+    TextureManager numGridTexture;
+    TextureManager instructionsTexture;
+    TextureManager piecesTexture;
 public : 
 	Khet();
 	~Khet();

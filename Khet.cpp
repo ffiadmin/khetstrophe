@@ -9,6 +9,7 @@
 
 Khet::Khet() : activeSelected(false), step(1), turn('g') {
     clickedThisFrame=false;
+    gamestate = PIECES;
 }
 
 Khet::~Khet() {
@@ -74,10 +75,16 @@ void Khet::callback(ClickData<KhetPiece> d) {
 void Khet::initialize(HWND hwnd) {
 	Game::initialize(hwnd);
 
-	if (!numGridTexture.initialize(graphics,NUM_GRID))
+	if (!instructionsTexture.initialize(graphics,INSTRUCTIONS_IMG))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing instructions texture"));
+    if (!rules.initialize(graphics,0,0,0,&instructionsTexture))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing rules"));
+
+    if (!piecesTexture.initialize(graphics,PIECES_IMG))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing numGrid texture"));
-    if (!numGrid.initialize(graphics,0,0,0,&numGridTexture))
+    if (!pieceInfo.initialize(graphics,0,0,0,&piecesTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing numGrid"));
+
 
 //Create the Laser
 	l = new Laser(this, graphics, Laser::COLOR_RED);
@@ -100,8 +107,21 @@ void Khet::releaseAll() {
 
 void Khet::render() {
 	graphics->spriteBegin();
-	this->g->draw();
-	l->draw();	
+	switch(gamestate) {
+    case PIECES:
+        pieceInfo.draw();
+        break;
+    case INSTRUCTIONS:
+        rules.draw();
+        break;
+    case PLAY:
+        this->g->draw();
+	    l->draw();
+        break;
+    case END:
+    default:
+        break;
+    }
     graphics->spriteEnd();   
 }
 
@@ -110,119 +130,143 @@ void Khet::resetAll() {
 }
 
 void Khet::update() {
-//Update stuff
-	l->update(frameTime);
-	this->g->update(frameTime);
-
-//User clicked
-	if (this->input->getMouseLButton() && clickedThisFrame == false) {
-		int mouseX = this->input->getMouseX();
-		int mouseY = this->input->getMouseY();
-
-		int height = Y * gridNS::HEIGHT;
-		int width = X * gridNS::WIDTH;
-
-	//What tile was clicked on?
-		active.x = mouseX / gridNS::WIDTH;
-		active.y = mouseY / gridNS::HEIGHT;
-		active.tile = (*grid)[active.x][active.y];
-
-		if (active.tile->getColor() == turn && active.tile->getActive()) {
-			step = 2;
-			activeSelected = true;
-		} else {
-			MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
-		}
+switch(gamestate) {
+case PIECES:
+    if(this->input->getMouseLButton() && clickedThisFrame == false) {
+        gamestate = INSTRUCTIONS;
         clickedThisFrame = true;
-	}
-    if (!this->input->getMouseLButton()) {
-        clickedThisFrame = false;
+    }
+    break;
+case INSTRUCTIONS:
+    if (this->input->getMouseLButton() && clickedThisFrame == false) {
+        gamestate = PLAY;
+        clickedThisFrame = true;
+    }
+    break;
+case PLAY:
+    //Update stuff
+	    l->update(frameTime);
+	    this->g->update(frameTime);
+
+    //User clicked
+	    if (this->input->getMouseLButton() && clickedThisFrame == false) {
+		    int mouseX = this->input->getMouseX();
+		    int mouseY = this->input->getMouseY();
+
+		    int height = Y * gridNS::HEIGHT;
+		    int width = X * gridNS::WIDTH;
+
+	    //What tile was clicked on?
+		    active.x = mouseX / gridNS::WIDTH;
+		    active.y = mouseY / gridNS::HEIGHT;
+		    active.tile = (*grid)[active.x][active.y];
+
+		    if (active.tile->getColor() == turn && active.tile->getActive()) {
+			    step = 2;
+			    activeSelected = true;
+		    } else {
+			    MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
+		    }
+            clickedThisFrame = true;
+	    }
+        if (!this->input->getMouseLButton()) {
+            clickedThisFrame = false;
+        }
+
+    //Move or rotate
+        if (activeSelected) {
+		    if (input->isKeyDown('1') && canSwap(-1, -1)) {
+			    g->swap(active.x, active.y, active.x-1, active.y-1);
+			    activeSelected = false;
+			    step = 3;
+		    } else if (input->isKeyDown('2') && canSwap(0,-1)) {
+			    g->swap(active.x, active.y, active.x, active.y-1);
+			    activeSelected = false;
+			    step = 3;
+		    } else if (input->isKeyDown('3') && canSwap(1,-1)) {
+			    g->swap(active.x, active.y, active.x+1, active.y-1);
+			    activeSelected = false;
+			    step = 3;
+		    } else if (input->isKeyDown('4') && canSwap(-1,0)) {
+			    g->swap(active.x, active.y, active.x-1, active.y);
+			    activeSelected = false;
+			    step = 3;
+		    } else if (input->isKeyDown('6') && canSwap(1,0)) {
+			    g->swap(active.x, active.y, active.x+1, active.y);
+			    activeSelected = false;
+			    step = 3;
+		    } else if (input->isKeyDown('7') && canSwap(-1,1)) {
+			    g->swap(active.x, active.y, active.x-1, active.y+1);
+			    activeSelected = false;
+			    step = 3;
+		    } else if (input->isKeyDown('8') && canSwap(0,1)) {
+			    g->swap(active.x, active.y, active.x, active.y+1);
+			    activeSelected = false;
+			    step = 3;
+		    } else if (input->isKeyDown('9') && canSwap(1,1)) {
+			    g->swap(active.x, active.y, active.x+1, active.y+1);
+			    activeSelected = false;
+			    step = 3;
+		    } else if (input->isKeyDown(VK_LEFT)) {
+			    active.tile->setOrientation(active.tile->getOrientation()-1);
+			    activeSelected = false;
+			    step = 3;
+		    } else if (input->isKeyDown(VK_RIGHT)) {
+			    active.tile->setOrientation(active.tile->getOrientation()+1);
+			    activeSelected = false;
+			    step = 3;
+		    }
+	    }
+
+    //Fire!!
+
+	    if (!activeSelected && step == 3) {
+		    int shootX, shootY;	
+		    if (turn == 'g') {
+			    shootX = X-1;
+			    shootY = Y-1;
+		    }
+		    else {
+			    shootX = 0;
+			    shootY = 0;
+		    }
+
+		    switch((*grid)[shootX][shootY]->getOrientation())
+		    {
+		    case 0: //left
+			    l->fireDeg((*grid)[shootX][shootY]->getCenterX()-32, (*grid)[shootX][shootY]->getCenterY(), 180.0f);
+			    //l->fireDeg(32.0f, 64.0f, 180.0f);
+			    break;
+		    case 1: //up
+			    l->fireDeg((*grid)[shootX][shootY]->getCenterX(), (*grid)[shootX][shootY]->getCenterY()-40, 90.0f);
+			    //l->fireDeg(32.0f, 64.0f, 90.0f);
+			    break;
+		    case 2: //right
+			    l->fireDeg((*grid)[shootX][shootY]->getCenterX()+32, (*grid)[shootX][shootY]->getCenterY(), 0.0f);
+			    //l->fireDeg(32.0f, 64.0f, 0.0f);
+			    break;
+		    case 3: //down
+			    l->fireDeg((*grid)[shootX][shootY]->getCenterX(), (*grid)[shootX][shootY]->getCenterY()+32, 270.0f);
+			    //l->fireDeg(32.0f, 64.0f, 270.0f);
+		    }
+		    //change player
+		    if(turn == 'g')
+			    turn = 'r';
+		    else
+			    turn = 'g';
+
+		    step = 1;
+	    }
+        break;
+case END:
+default:
+    break;
     }
 
-//Move or rotate
-    if (activeSelected) {
-		if (input->isKeyDown('1') && canSwap(-1, -1)) {
-			g->swap(active.x, active.y, active.x-1, active.y-1);
-			activeSelected = false;
-			step = 3;
-		} else if (input->isKeyDown('2') && canSwap(0,-1)) {
-			g->swap(active.x, active.y, active.x, active.y-1);
-			activeSelected = false;
-			step = 3;
-		} else if (input->isKeyDown('3') && canSwap(1,-1)) {
-			g->swap(active.x, active.y, active.x+1, active.y-1);
-			activeSelected = false;
-			step = 3;
-		} else if (input->isKeyDown('4') && canSwap(-1,0)) {
-			g->swap(active.x, active.y, active.x-1, active.y);
-			activeSelected = false;
-			step = 3;
-		} else if (input->isKeyDown('6') && canSwap(1,0)) {
-			g->swap(active.x, active.y, active.x+1, active.y);
-			activeSelected = false;
-			step = 3;
-		} else if (input->isKeyDown('7') && canSwap(-1,1)) {
-			g->swap(active.x, active.y, active.x-1, active.y+1);
-			activeSelected = false;
-			step = 3;
-		} else if (input->isKeyDown('8') && canSwap(0,1)) {
-			g->swap(active.x, active.y, active.x, active.y+1);
-			activeSelected = false;
-			step = 3;
-		} else if (input->isKeyDown('9') && canSwap(1,1)) {
-			g->swap(active.x, active.y, active.x+1, active.y+1);
-			activeSelected = false;
-			step = 3;
-		} else if (input->isKeyDown(VK_LEFT)) {
-			active.tile->setOrientation(active.tile->getOrientation()-1);
-			activeSelected = false;
-			step = 3;
-		} else if (input->isKeyDown(VK_RIGHT)) {
-			active.tile->setOrientation(active.tile->getOrientation()+1);
-			activeSelected = false;
-			step = 3;
-		}
-	}
 
-//Fire!!
-
-	if (!activeSelected && step == 3) {
-		int shootX, shootY;	
-		if (turn == 'g') {
-			shootX = X-1;
-			shootY = Y-1;
-		}
-		else {
-			shootX = 0;
-			shootY = 0;
-		}
-
-		switch((*grid)[shootX][shootY]->getOrientation())
-		{
-		case 0: //left
-			l->fireDeg((*grid)[shootX][shootY]->getCenterX()-32, (*grid)[shootX][shootY]->getCenterY(), 180.0f);
-			//l->fireDeg(32.0f, 64.0f, 180.0f);
-			break;
-		case 1: //up
-			l->fireDeg((*grid)[shootX][shootY]->getCenterX(), (*grid)[shootX][shootY]->getCenterY()-40, 90.0f);
-			//l->fireDeg(32.0f, 64.0f, 90.0f);
-			break;
-		case 2: //right
-			l->fireDeg((*grid)[shootX][shootY]->getCenterX()+32, (*grid)[shootX][shootY]->getCenterY(), 0.0f);
-			//l->fireDeg(32.0f, 64.0f, 0.0f);
-			break;
-		case 3: //down
-			l->fireDeg((*grid)[shootX][shootY]->getCenterX(), (*grid)[shootX][shootY]->getCenterY()+32, 270.0f);
-			//l->fireDeg(32.0f, 64.0f, 270.0f);
-		}
-		//change player
-		if(turn == 'g')
-			turn = 'r';
-		else
-			turn = 'g';
-
-		step = 1;
-	}
+if (!this->input->getMouseLButton()) {
+        clickedThisFrame = false;
+    }
 }
 
 bool Khet::canSwap(int x, int y) {

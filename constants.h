@@ -99,7 +99,14 @@ const char MENU_IMAGE[] =     "pictures\\menu.png";      // menu texture
 const char BOARD[] =          "pictures\\GameBoard.png";
     //number grid
 const char NUM_GRID[] =       "pictures\\NumberGrid.png";
-    //pieces
+
+//instructions
+const char INSTRUCTIONS_IMG[] =       "pictures\\Rules.png";
+
+    //pieces_types
+const char PIECES_IMG[] =       "pictures\\Pieces.png";
+
+//pieces
 const char ANUBIS_RED[] =     "pictures\\Anubis_Red.png";
 const char ANUBIS_GREY[] =   "pictures\\Anubis_White.png";
 const char MIRROR_RED[] =     "pictures\\Mirror_Red.png";
@@ -111,6 +118,7 @@ const char SCARAB_GREY[] =   "pictures\\Scarab_White.png";
 const char SPHINX_RED[] =     "pictures\\Sphinx_Red.png";
 const char SPHINX_GREY[] =   "pictures\\Sphinx_White.png";
 
+enum GAMESTATE{PIECES,INSTRUCTIONS,PLAY,END};
 
 
 // audio files required by audio.cpp
