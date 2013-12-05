@@ -89,6 +89,9 @@ const float MIN_FRAME_RATE = 10.0f;             // the minimum frame rate
 const float MIN_FRAME_TIME = 1.0f/FRAME_RATE;   // minimum desired time for 1 frame
 const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calculations
 
+const int X = 10;
+const int Y = 8;
+
 // graphic images
 const char MENU_IMAGE[] =     "pictures\\menu.png";      // menu texture
     

@@ -19,6 +19,8 @@ Tile::Tile(Game* game, Graphics* graphics) :
 		this->spriteData.rect.left = -tileNS::WIDTH / 2;
 		this->spriteData.rect.right = tileNS::WIDTH / 2;
 		this->spriteData.rect.top = -tileNS::HEIGHT / 2;
+
+		this->active = false;
 }
 
 Tile::~Tile() {

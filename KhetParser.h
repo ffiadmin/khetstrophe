@@ -49,7 +49,9 @@ public :
 				returnVal = new Sphinx(game, graphics, 'g');
 				break;
 			default : 
-				returnVal = new T(game, graphics);
+				returnVal = new Anubis(game, graphics, 'r');
+				returnVal->setActive(false);
+				returnVal->setVisible(false);
 				break;
 		}
 

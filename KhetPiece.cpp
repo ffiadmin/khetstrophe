@@ -1,6 +1,8 @@
 #include "KhetPiece.h"
 
-KhetPiece::KhetPiece(Game* game, Graphics* graphics) : Tile(game, graphics) { }
+KhetPiece::KhetPiece(Game* game, Graphics* graphics) : Tile(game, graphics) {
+	this->active = true;
+}
 
 void KhetPiece::rotate(int dir)
 {

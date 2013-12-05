@@ -1,34 +1,39 @@
-#ifndef KHET_H             // Prevent multiple definitions if this 
-#define KHET_H             // file is included in more than one place
-#define WIN32_LEAN_AND_MEAN
+#ifndef KHET_H
+#define KHET_H
 
 #include "game.h"
 #include "Grid.h"
 #include "KhetParser.h"
 #include "Laser.h"
+#include "Tile.h"
 
-class Khet : public Game
-{
-private:
+class Khet : public Game {
+private : 
+	Grid<KhetPiece, X, Y>* g;
+	KhetParser<KhetPiece>* kp;
+	Laser* l;
 
+	int step;
+	char turn;
+	vector<vector<KhetPiece*>>* grid;
+	ClickData<KhetPiece> active;
+	bool activeSelected;
 
-public:
-    // Constructor
-    Khet();
-    // Destructor
-    virtual ~Khet();
-    // Initialize the game
-    void initialize(HWND hwnd);
+	Image numGrid;
+      TextureManager numGridTexture;
 
-    void update();      // must override pure virtual from Game
-    void ai();          // "
-    void collisions();  // "
-    void render();      // "
+public : 
+	Khet();
+	~Khet();
 
+	void ai();
+	void callback(ClickData<KhetPiece> d);
+	void collisions();
+	void initialize(HWND hwnd);
     void releaseAll();
+    void render();
     void resetAll();
-
-	void restart();
+	void update();
 };
 
 #endif

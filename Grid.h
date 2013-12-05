@@ -45,7 +45,7 @@ private :
 	int y;
 
 public : 
-	Grid(Game* game, Graphics* graphics, FPtr callback) : bkgSource('\0'), game(game), graphics(graphics), callback(callback) {
+	Grid(Game* game, Graphics* graphics) : bkgSource('\0'), game(game), graphics(graphics) {
 		input = game->getInput();
         this->x = 0;
 		this->y = 0;
@@ -83,7 +83,7 @@ public :
 	}
 
 	vector<vector<T*>>* getT() {
-		return this->pieces;
+		return &this->pieces;
 	}
 
 	void initialize(GridParser<T>* g) {
@@ -168,7 +168,7 @@ public :
 		}
 
 	//Check for clicks
-		if (this->input->getMouseLButton()) {
+		/*if (this->input->getMouseLButton()) {
 			int mouseX = this->input->getMouseX();
 			int mouseY = this->input->getMouseY();
 
@@ -185,7 +185,7 @@ public :
 
 					this->callback(d);
 			}
-		}
+		}*/
 	}
 };
 
