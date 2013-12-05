@@ -260,6 +260,7 @@ case PLAY:
         break;
 case END:
 default:
+    PostQuitMessage(0);
     break;
     }
 
