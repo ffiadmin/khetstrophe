@@ -92,6 +92,11 @@ void Khet::initialize(HWND hwnd) {
 	if (!controls.initialize(graphics, 0, 0, 0, &controlsTexture))
 		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing numGrid"));
 
+	if (!numGridTexture.initialize(graphics, NUM_GRID))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing numGrid texture"));
+	if (!numGrid.initialize(graphics, 0, 0, 0, &numGridTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing numGrid"));
+
 
 //Create the Laser
 	l = new Laser(this, graphics, Laser::COLOR_RED);
@@ -127,6 +132,10 @@ void Khet::render() {
     case PLAY:
         this->g->draw();
 	    l->draw();
+		if (activeSelected)
+		{
+			numGrid.draw();
+		}
         break;
     case END:
     default:
@@ -180,6 +189,8 @@ case PLAY:
 		    if (active.tile->getColor() == turn && active.tile->getActive()) {
 			    step = 2;
 			    activeSelected = true;
+				numGrid.setX(active.x * 64 - 64);
+				numGrid.setY(active.y * 64 - 64);
 		    } else {
 			    MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
 		    }
