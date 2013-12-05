@@ -5,6 +5,7 @@
 *   Description: This file defines the Grid class which can be ported to other games easily  
 */
 
+#ifndef GRID_H
 #define GRID_H
 
 #include "game.h"
