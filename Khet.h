@@ -41,6 +41,7 @@ public :
     void render();
     void resetAll();
 	void update();
+    bool canSwap(int,int);
 };
 
 #endif

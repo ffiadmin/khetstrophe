@@ -135,36 +135,36 @@ void Khet::update() {
 	}
 
 //Move or rotate
-	if (activeSelected) {
-		if (input->isKeyDown('1')) {
+    if (activeSelected) {
+		if (input->isKeyDown('1') && canSwap(-1, -1)) {
 			g->swap(active.x, active.y, active.x-1, active.y-1);
 			activeSelected = false;
 			step = 3;
-		} else if (input->isKeyDown('2')) {
+		} else if (input->isKeyDown('2') && canSwap(0,-1)) {
 			g->swap(active.x, active.y, active.x, active.y-1);
 			activeSelected = false;
 			step = 3;
-		} else if (input->isKeyDown('3')) {
+		} else if (input->isKeyDown('3') && canSwap(1,-1)) {
 			g->swap(active.x, active.y, active.x+1, active.y-1);
 			activeSelected = false;
 			step = 3;
-		} else if (input->isKeyDown('4')) {
+		} else if (input->isKeyDown('4') && canSwap(-1,0)) {
 			g->swap(active.x, active.y, active.x-1, active.y);
 			activeSelected = false;
 			step = 3;
-		} else if (input->isKeyDown('6')) {
+		} else if (input->isKeyDown('6') && canSwap(1,0)) {
 			g->swap(active.x, active.y, active.x+1, active.y);
 			activeSelected = false;
 			step = 3;
-		} else if (input->isKeyDown('7')) {
+		} else if (input->isKeyDown('7') && canSwap(-1,1)) {
 			g->swap(active.x, active.y, active.x-1, active.y+1);
 			activeSelected = false;
 			step = 3;
-		} else if (input->isKeyDown('8')) {
+		} else if (input->isKeyDown('8') && canSwap(0,1)) {
 			g->swap(active.x, active.y, active.x, active.y+1);
 			activeSelected = false;
 			step = 3;
-		} else if (input->isKeyDown('9')) {
+		} else if (input->isKeyDown('9') && canSwap(1,1)) {
 			g->swap(active.x, active.y, active.x+1, active.y+1);
 			activeSelected = false;
 			step = 3;
@@ -219,3 +219,32 @@ void Khet::update() {
 		step = 1;
 	}
 }
+
+bool Khet::canSwap(int x, int y) {
+    if(active.tile->getName() == 'X') // pharoahs can't move
+        return false;
+    
+    KhetPiece* current;    
+    if(active.x + x >= 0 && active.x + x < X && active.y + y >= 0 && active.y + y < Y) {
+       current = (*grid)[active.x+x][active.y+y];
+       if(current->getActive()) { //tile is empty and tile's color
+            return true;
+       }
+       else if(active.tile->getName() == 'S') {
+           switch(current->getName()) {
+           case 'P': // Pyramid
+           case 'A': //anubis
+               return true;
+               break;
+           case 'X': // sphinx
+           case 'H': //pharoah
+           case 'S': //Scarab
+           default:
+               return false;
+               break;
+           }
+       }
+    }
+
+    return false;
+}     
