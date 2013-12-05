@@ -208,11 +208,11 @@ case PLAY:
 			    activeSelected = false;
 			    step = 3;
 		    } else if (input->isKeyDown(VK_LEFT)) {
-			    active.tile->setOrientation(active.tile->getOrientation()-1);
+				active.tile->rotate(0);
 			    activeSelected = false;
 			    step = 3;
 		    } else if (input->isKeyDown(VK_RIGHT)) {
-			    active.tile->setOrientation(active.tile->getOrientation()+1);
+				active.tile->rotate(1);
 			    activeSelected = false;
 			    step = 3;
 		    }
