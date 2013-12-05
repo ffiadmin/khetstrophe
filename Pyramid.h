@@ -90,6 +90,7 @@ public:
 			return NOTHING;
 		}
 	}
+	virtual char getName() {return 'P';}
 private:
 
 };

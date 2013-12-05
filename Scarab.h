@@ -61,6 +61,7 @@ public:
 			return NOTHING;
 		}
 	}
+	virtual char getName() {return 'S';}
 private:
 
 };

@@ -20,6 +20,7 @@ public:
 	void rotate(int dir); // 0 left (-90 degree) rotation, 1 right (90 degree) rotation
 	virtual RESPONSE onCollision(int dir)=0; // what to do when piece is hit by laser
 
+	virtual char getName()=0;
 
 	char getColor() {return color;}
 	void setColor(char c) {color = c;}

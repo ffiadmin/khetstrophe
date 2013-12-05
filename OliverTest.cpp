@@ -50,7 +50,7 @@ void OliverTest::initialize(HWND hwnd) {
 	this->kp = new KhetParser<Tile>("config\\classic.txt");
 
 //Create the Grid
-	this->g = new Grid<Tile, 10, 8>(this, graphics, callback);
+	this->g = new Grid<Tile, 10, 8>(this, graphics);
 	this->g->setBkg("pictures\\GameBoard.png");
 	this->g->initialize(this->kp);
 

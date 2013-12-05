@@ -21,6 +21,7 @@ public:
 			setGraphic(SPHINX_GREY, 2);
 	}
 	RESPONSE onCollision(int dir) {return NOTHING;} // dir: 0 left, 1 up, 2 right, 3 down
+	virtual char getName() {return 'X';}
 private:
 
 };
