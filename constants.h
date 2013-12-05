@@ -92,6 +92,8 @@ const float MAX_FRAME_TIME = 1.0f/MIN_FRAME_RATE; // maximum time used in calcul
 const int X = 10;
 const int Y = 8;
 
+
+
 // graphic images
 const char MENU_IMAGE[] =     "pictures\\menu.png";      // menu texture
     

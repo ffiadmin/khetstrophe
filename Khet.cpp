@@ -268,13 +268,24 @@ if (!this->input->getMouseLButton()) {
 }
 
 bool Khet::canSwap(int x, int y) {
+
+	char boardColor[8][10] = //y by x
+	{{'g', 'r', ' ', ' ', ' ', ' ', ' ', ' ', 'g', 'r'},
+	 {'g', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'r'},
+	 {'g', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'r'},
+	 {'g', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'r'},
+	 {'g', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'r'},
+	 {'g', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'r'},
+	 {'g', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'r'},
+	 {'g', 'r', ' ', ' ', ' ', ' ', ' ', ' ', 'g', 'r'}};
+
     if(active.tile->getName() == 'X') // pharoahs can't move
         return false;
     
     KhetPiece* current;    
     if(active.x + x >= 0 && active.x + x < X && active.y + y >= 0 && active.y + y < Y) {
        current = (*grid)[active.x+x][active.y+y];
-       if(!current->getActive() && current->getColor() == turn) { //tile is empty and tile's color
+       if(!current->getActive() && (boardColor[active.y+y][active.x+x] == turn || boardColor[active.y+y][active.x+x] == ' ')) { //tile is empty and tile's color
             return true;
        }
        else if(active.tile->getName() == 'S') {
