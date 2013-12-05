@@ -37,7 +37,7 @@ namespace laserNS {
 	const int   HEAD_HEIGHT  = 5;                     // Height of the head pixel of the laser
 	const int   HEAD_WIDTH   = 5;                     // Width of the head pixel of the laser
 	const int   TAIL         = 50;                    // Length of the laser's tail, in pixels
-	const int   VELOCITY     = 250;                   // Laser velocity, both X and Y
+	const int   VELOCITY     = 375;                   // Laser velocity, both X and Y
 	const float X            = 2.0f;                  // Default location of the head pixel of the laser
 	const float Y            = 2.0f;                  // Default location of the head pixel of the laser
 }

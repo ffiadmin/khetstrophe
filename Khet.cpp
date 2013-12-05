@@ -87,6 +87,11 @@ void Khet::initialize(HWND hwnd) {
     if (!pieceInfo.initialize(graphics,0,0,0,&piecesTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing numGrid"));
 
+	if (!controlsTexture.initialize(graphics, CONTROLS_IMG))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing numGrid texture"));
+	if (!controls.initialize(graphics, 0, 0, 0, &controlsTexture))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing numGrid"));
+
 
 //Create the Laser
 	l = new Laser(this, graphics, Laser::COLOR_RED);
