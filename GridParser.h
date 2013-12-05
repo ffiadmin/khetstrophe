@@ -1,3 +1,10 @@
+/*  
+*   Members: Garrett Young, Nick Tallents, Oliver Spryn, Zac Stahl
+*   Course: 322, Obj. Oriented / Adv. Programming
+*   Date: 04 Dec 2013 
+*   Description: This file defines the grid parser class and sets up the grid according to an input file  
+*/
+
 #ifndef GRID_PARSER_H
 #define GRID_PARSER_H
 

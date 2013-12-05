@@ -1,3 +1,10 @@
+/*  
+*   Members: Garrett Young, Nick Tallents, Oliver Spryn, Zac Stahl
+*   Course: 322, Obj. Oriented / Adv. Programming
+*   Date: 04 Dec 2013 
+*   Description: This file defines the KhetParser class which derives GridParser for our application  
+*/
+
 #ifndef KHET_PARSER_H
 #define KHET_PARSER_H
 

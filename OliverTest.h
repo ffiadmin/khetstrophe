@@ -1,3 +1,10 @@
+/*  
+*   Members: Garrett Young, Nick Tallents, Oliver Spryn, Zac Stahl
+*   Course: 322, Obj. Oriented / Adv. Programming
+*   Date: 04 Dec 2013 
+*   Description: This file defines the Oliver Test class and was used to test our program in early stages  
+*/
+
 #ifndef OLIVER_TEST_H
 #define OLIVER_TEST_H
 

@@ -1,3 +1,10 @@
+/*  
+*   Members: Garrett Young, Nick Tallents, Oliver Spryn, Zac Stahl
+*   Course: 322, Obj. Oriented / Adv. Programming
+*   Date: 04 Dec 2013 
+*   Description: This file defines the BaseException class which all error handling classes are derived. 
+*/
+
 #ifndef BASEEXCEPTION_H
 #define BASEEXCEPTION_H
 

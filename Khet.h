@@ -1,3 +1,10 @@
+/*  
+*   Members: Garrett Young, Nick Tallents, Oliver Spryn, Zac Stahl
+*   Course: 322, Obj. Oriented / Adv. Programming
+*   Date: 04 Dec 2013 
+*   Description: This file defines the Khet class and is our main game engine  
+*/
+
 #ifndef KHET_H
 #define KHET_H
 

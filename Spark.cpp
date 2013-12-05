@@ -1,3 +1,11 @@
+/*  
+*   Members: Garrett Young, Nick Tallents, Oliver Spryn, Zac Stahl
+*   Course: 322, Obj. Oriented / Adv. Programming
+*   Date: 04 Dec 2013 
+*   Description: This file implements the Spark class  
+*/
+
+
 #include "Spark.h"
 
 Spark::Spark(int width, int height) : startBlue(255), startGreen(255), startRed(255),

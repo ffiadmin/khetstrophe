@@ -1,3 +1,11 @@
+/*  
+*   Members: Garrett Young, Nick Tallents, Oliver Spryn, Zac Stahl
+*   Course: 322, Obj. Oriented / Adv. Programming
+*   Date: 04 Dec 2013 
+*   Description: This file implements the Tile class  
+*/
+
+
 #include "Tile.h"
 
 Tile::Tile(Game* game, Graphics* graphics) : 

@@ -1,3 +1,10 @@
+/*  
+*   Members: Garrett Young, Nick Tallents, Oliver Spryn, Zac Stahl
+*   Course: 322, Obj. Oriented / Adv. Programming
+*   Date: 04 Dec 2013 
+*   Description: This file implements the Khet class which is the main engine for our game  
+*/
+
 #include "Khet.h"
 
 Khet::Khet() : activeSelected(false), step(1), turn('g') {
