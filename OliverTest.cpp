@@ -20,8 +20,8 @@ void OliverTest::collisions() {
 	//}
 }
 
-void callback(Tile *tile) {
-
+void callback(ClickData<Tile> d) {
+	MessageBox(NULL, "Hi", "Error", MB_OK);
 }
 
 void OliverTest::initialize(HWND hwnd) {
