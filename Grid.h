@@ -20,9 +20,16 @@ namespace gridNS {
 	const int WIDTH   = 64;
 }
 
+template <class T>
+struct ClickData {
+	ClickData() { };
+	int x, y;
+	T* tile;
+};
+
 template <class T, int X, int Y>
 class Grid {
-typedef void(*FPtr)(T*);
+typedef void(*FPtr)(ClickData<T>);
 
 private : 
 	Image background;
@@ -171,10 +178,12 @@ public :
 		//What tile was clicked on?
 			if (mouseX >= this->x && mouseX <= width &&
 				mouseY >= this->y && mouseY <= height) {
-					int clickX = mouseX / gridNS::WIDTH;
-					int clickY = mouseY / gridNS::HEIGHT;
+					ClickData<T> d;
+					d.x = mouseX / gridNS::WIDTH;
+					d.y = mouseY / gridNS::HEIGHT;
+					d.tile = this->pieces[d.x][d.y];
 
-					this->callback(this->pieces[clickY][clickX]);
+					this->callback(d);
 			}
 		}
 	}

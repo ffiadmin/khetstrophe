@@ -7,7 +7,7 @@
 #include "Laser.h"
 #include "Tile.h"
 
-void callback(Tile* t);
+void callback(ClickData<Tile> t);
 
 class OliverTest :	public Game {
 private : 
