@@ -15,9 +15,6 @@
 using std::string;
 using std::vector;
 
-
- 
-
 namespace gridNS {
 	const int PADDING = 0;
 	const int HEIGHT  = 64;
@@ -27,6 +24,7 @@ namespace gridNS {
 template <class T, int X, int Y>
 class Grid {
 typedef void(*FPtr)(T*);
+
 private : 
 	Image background;
 	TextureManager backgroundTM;
@@ -34,12 +32,11 @@ private :
 	Graphics* graphics;
 
 	char *bkgSource;
+	FPtr callback;
+	Input* input;
 	vector<vector<T*>> pieces;
 	int x;
 	int y;
-    FPtr callback;
-    Input* input;
-    
 
 public : 
 	Grid(Game* game, Graphics* graphics, FPtr callback) : bkgSource('\0'), game(game), graphics(graphics), callback(callback) {
@@ -107,10 +104,10 @@ public :
 			}
 		}
 
-		for (int i = 0; i < X; ++i) {
-			for (int j = 0; j < Y; ++j) {
-				this->pieces[i][j]->setOrientation(g->configureDir());
-				//this->pieces[i][j]->setOrientation(3);
+		for (int i = 0; i < Y; ++i) {
+			for (int j = 0; j < X; ++j) {
+				int dundundun = g->configureDir();
+				this->pieces[j][i]->setOrientation(dundundun);
 			}
 		}
 	}
