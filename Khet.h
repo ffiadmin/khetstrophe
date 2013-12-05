@@ -25,6 +25,7 @@ private :
 	vector<vector<KhetPiece*>>* grid;
 	ClickData<KhetPiece> active;
 	bool activeSelected;
+    bool clickedThisFrame;
 
 	Image numGrid;
       TextureManager numGridTexture;

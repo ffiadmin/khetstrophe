@@ -8,6 +8,7 @@
 #include "Khet.h"
 
 Khet::Khet() : activeSelected(false), step(1), turn('g') {
+    clickedThisFrame=false;
 }
 
 Khet::~Khet() {
@@ -114,7 +115,7 @@ void Khet::update() {
 	this->g->update(frameTime);
 
 //User clicked
-	if (this->input->getMouseLButton()) {
+	if (this->input->getMouseLButton() && clickedThisFrame == false) {
 		int mouseX = this->input->getMouseX();
 		int mouseY = this->input->getMouseY();
 
@@ -132,7 +133,11 @@ void Khet::update() {
 		} else {
 			MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
 		}
+        clickedThisFrame = true;
 	}
+    if (!this->input->getMouseLButton()) {
+        clickedThisFrame = false;
+    }
 
 //Move or rotate
     if (activeSelected) {
@@ -227,7 +232,7 @@ bool Khet::canSwap(int x, int y) {
     KhetPiece* current;    
     if(active.x + x >= 0 && active.x + x < X && active.y + y >= 0 && active.y + y < Y) {
        current = (*grid)[active.x+x][active.y+y];
-       if(current->getActive()) { //tile is empty and tile's color
+       if(!current->getActive()) { //tile is empty and tile's color
             return true;
        }
        else if(active.tile->getName() == 'S') {
