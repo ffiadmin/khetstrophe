@@ -2,7 +2,6 @@
 
 Khet::Khet()
 {
-
 }
 
 //=============================================================================
@@ -10,8 +9,6 @@ Khet::Khet()
 //=============================================================================
 Khet::~Khet()
 {
-
-	
     releaseAll();           // call onLostDevice() for every graphics item
 }
 
@@ -22,10 +19,8 @@ Khet::~Khet()
 void Khet::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
-
 	
 }
-
 
 void Khet::restart()
 {
@@ -45,7 +40,6 @@ void Khet::update()
 //=============================================================================
 void Khet::ai()
 {
-
 }
 
 //=============================================================================
@@ -62,8 +56,6 @@ void Khet::collisions()
 void Khet::render()
 {
     graphics->spriteBegin();                // begin drawing sprites
-
-
 
 	graphics->spriteEnd();                  // end drawing sprites
 }

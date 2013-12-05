@@ -3,7 +3,9 @@
 #define WIN32_LEAN_AND_MEAN
 
 #include "game.h"
-
+#include "Grid.h"
+#include "KhetParser.h"
+#include "Laser.h"
 
 class Khet : public Game
 {
