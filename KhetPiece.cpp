@@ -10,6 +10,9 @@
 
 KhetPiece::KhetPiece(Game* game, Graphics* graphics) : Tile(game, graphics) {
 	this->active = true;
+	this->setCollisionType(entityNS::BOX);
+	RECT e = {-5, -5, 5, 5};
+	this->setEdge(e);
 }
 
 void KhetPiece::rotate(int dir)
