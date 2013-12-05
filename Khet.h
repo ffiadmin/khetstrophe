@@ -13,21 +13,25 @@
 #include "KhetParser.h"
 #include "Laser.h"
 #include "Tile.h"
+#include "Explode.h"
 
 class Khet : public Game {
 private : 
     Grid<KhetPiece, X, Y>* g;
 	KhetParser<KhetPiece>* kp;
 	Laser* l;
+	Explode* explosion;
 
     GAMESTATE gamestate;
 
 	int step;
 	char turn;
+	char loser;
 	vector<vector<KhetPiece*>>* grid;
 	ClickData<KhetPiece> active;
 	bool activeSelected;
     bool clickedThisFrame;
+	bool displayed;
 
 	Image numGrid;
     Image rules;
