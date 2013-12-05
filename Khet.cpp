@@ -9,7 +9,7 @@
 
 Khet::Khet() : activeSelected(false), step(1), turn('g') {
     clickedThisFrame=false;
-    gamestate = PIECES;
+    gamestate = START;
 	loser = '\0';
 	displayed = false;
 }
@@ -61,6 +61,10 @@ void Khet::collisions() {
 						gamestate = END;
 						loser = t->getColor();
 					}
+
+					ep.really = true;
+                    ep.x = l->getX();
+                    ep.y = l->getY();
 				case NOTHING:
 					this->l->destroy();
 				}
@@ -81,6 +85,11 @@ void Khet::callback(ClickData<KhetPiece> d) {
 
 void Khet::initialize(HWND hwnd) {
 	Game::initialize(hwnd);
+
+	if (!startTexture.initialize(graphics,START_IMG))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing starting texture"));
+    if (!start.initialize(graphics,0,0,0,&startTexture))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing start screen"));
 
 	if (!instructionsTexture.initialize(graphics,INSTRUCTIONS_IMG))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing instructions texture"));
@@ -126,6 +135,9 @@ void Khet::releaseAll() {
 void Khet::render() {
 	graphics->spriteBegin();
 	switch(gamestate) {
+	case START:
+        start.draw();
+        break;
     case PIECES:
         pieceInfo.draw();
         break;
@@ -142,6 +154,15 @@ void Khet::render() {
 		{
 			numGrid.draw();
 		}
+
+		if (ep.really) {
+			explosion->explodeAt(ep.x, ep.y);
+
+			if (explosion->completed()) {
+				ep.really = false;
+			}
+		}
+
         break;
     case END:
 		explosion->explodeAt(rand() % GAME_WIDTH, rand() % GAME_HEIGHT);
@@ -157,6 +178,12 @@ void Khet::resetAll() {
 
 void Khet::update() {
 	switch (gamestate) {
+	case START:
+		if (this->input->getMouseLButton() && clickedThisFrame == false) {
+			gamestate = PIECES;
+			clickedThisFrame = true;
+		}
+		break;
 	case PIECES:
 		if (this->input->getMouseLButton() && clickedThisFrame == false) {
 			gamestate = INSTRUCTIONS;
@@ -265,7 +292,6 @@ void Khet::update() {
 		}
 		//Fire!!
 
-		//if (!activeSelected && step == 3) {
 		if (step == 3) {
 			int shootX, shootY;
 			if (turn == 'r') {
@@ -299,6 +325,7 @@ void Khet::update() {
 
 			step = 1;
 		}
+
 		break;
 	case END:
 		if (!displayed)

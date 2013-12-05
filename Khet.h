@@ -15,12 +15,20 @@
 #include "Tile.h"
 #include "Explode.h"
 
+struct ExplodeData {
+	ExplodeData() {really = false; x = 0; y = 0;};
+	bool really;
+	int x;
+	int y;
+};
+
 class Khet : public Game {
 private : 
     Grid<KhetPiece, X, Y>* g;
 	KhetParser<KhetPiece>* kp;
 	Laser* l;
 	Explode* explosion;
+	ExplodeData ep;
 
     GAMESTATE gamestate;
 
@@ -33,11 +41,13 @@ private :
     bool clickedThisFrame;
 	bool displayed;
 
+	Image start;
 	Image numGrid;
     Image rules;
     Image pieceInfo;
 	Image controls;
     
+	TextureManager startTexture;
     TextureManager numGridTexture;
     TextureManager instructionsTexture;
     TextureManager piecesTexture;
