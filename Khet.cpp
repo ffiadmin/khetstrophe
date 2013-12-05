@@ -20,16 +20,41 @@ void Khet::ai() {
 
 void Khet::collisions() {
 	D3DXVECTOR2 v;
-	Tile* t;
+	KhetPiece* t;
 
 	for(int i = 0; i < 10; ++i) {
 		for(int j = 0; j < 8; ++j) {
 			t = (*grid)[i][j];
+			if (t->collidesWith(*l, v)) {
+				RESPONSE r;
+				if (t->collidesWithLeft(*l, v))
+					r = t->onCollision(0);
+				else if (t->collidesWithTop(*l, v))
+					r = t->onCollision(1);
+				else if (t->collidesWithRight(*l, v))
+					r = t->onCollision(2);
+				else if (t->collidesWithBottom(*l, v))
+					r = t->onCollision(3);
 
-			if (this->l->collidesWith(*t, v)) {
-				t->setActive(false);
-				t->setVisible(false);
-				this->l->destroy();
+				switch(r) {
+				case UP:
+					l->changeDirDeg(90);
+					break;
+				case DOWN:
+					l->changeDirDeg(270);
+					break;
+				case LEFT:
+					l->changeDirDeg(180);
+					break;
+				case RIGHT:
+					l->changeDirDeg(0);
+					break;
+				case DESTROY:
+					t->setActive(false);
+					t->setVisible(false);
+				case NOTHING:
+					this->l->destroy();
+				}
 			}
 		}
 	}
