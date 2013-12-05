@@ -220,7 +220,8 @@ case PLAY:
 
     //Fire!!
 
-	    if (!activeSelected && step == 3) {
+	    //if (!activeSelected && step == 3) {
+		if(step == 3) {
 		    int shootX, shootY;	
 		    if (turn == 'r') {
 			    shootX = X-1;
@@ -273,7 +274,7 @@ bool Khet::canSwap(int x, int y) {
     KhetPiece* current;    
     if(active.x + x >= 0 && active.x + x < X && active.y + y >= 0 && active.y + y < Y) {
        current = (*grid)[active.x+x][active.y+y];
-       if(!current->getActive()) { //tile is empty and tile's color
+       if(!current->getActive() && current->getColor() == turn) { //tile is empty and tile's color
             return true;
        }
        else if(active.tile->getName() == 'S') {
