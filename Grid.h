@@ -16,7 +16,6 @@ using std::string;
 using std::vector;
 
 namespace gridNS {
-	const int PADDING = 0;
 	const int HEIGHT  = 64;
 	const int WIDTH   = 64;
 }
@@ -83,8 +82,8 @@ public :
 	void initialize(GridParser<T>* g) {
 	//Initialize the background
 		if (this->bkgSource != '\0') {
-			int height = Y * gridNS::PADDING + Y * gridNS::HEIGHT;
-			int width = X * gridNS::PADDING + X * gridNS::WIDTH;
+			int height = Y * gridNS::HEIGHT;
+			int width = X * gridNS::WIDTH;
 
 			if (!this->backgroundTM.initialize(this->graphics, this->bkgSource))
 				throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing the grid background texture"));
@@ -103,8 +102,8 @@ public :
 			for (int j = 0; j < X; ++j) {
 				this->pieces[j][i] = g->next(this->game, this->graphics);
 				this->pieces[j][i]->initialize();
-				this->pieces[j][i]->setX(this->x + i * gridNS::PADDING + i * gridNS::WIDTH);
-				this->pieces[j][i]->setY(this->y + j * gridNS::PADDING + j * gridNS::HEIGHT);
+				this->pieces[j][i]->setX(this->x + i * gridNS::WIDTH);
+				this->pieces[j][i]->setY(this->y + j * gridNS::HEIGHT);
 			}
 		}
 
@@ -155,8 +154,8 @@ public :
 		for (int i = 0; i < X; ++i) {
 			for (int j = 0; j < Y; ++j) {
 				current = this->pieces[i][j];
-				current->setX(this->x + i * gridNS::PADDING + i * gridNS::WIDTH);
-				current->setY(this->y + j * gridNS::PADDING + j * gridNS::HEIGHT);
+				current->setX(this->x + i * gridNS::WIDTH);
+				current->setY(this->y + j * gridNS::HEIGHT);
 				current->update(frameTime);
 			}
 		}
@@ -166,10 +165,17 @@ public :
 			int mouseX = this->input->getMouseX();
 			int mouseY = this->input->getMouseY();
 
+			int height = Y * gridNS::HEIGHT;
+			int width = X * gridNS::WIDTH;
+
 		//What tile was clicked on?
+			if (mouseX >= this->x && mouseX <= width &&
+				mouseY >= this->y && mouseY <= height) {
+					int clickX = mouseX / gridNS::WIDTH;
+					int clickY = mouseY / gridNS::HEIGHT;
 
-
-			this->callback(this->pieces[0][0]);
+					this->callback(this->pieces[clickY][clickX]);
+			}
 		}
 	}
 };
