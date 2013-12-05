@@ -76,6 +76,10 @@ public :
 		return this->pieces[x][y];
 	}
 
+	vector<vector<T*>>* getT() {
+		return this->pieces;
+	}
+
 	void initialize(GridParser<T>* g) {
 	//Initialize the background
 		if (this->bkgSource != '\0') {
@@ -106,8 +110,7 @@ public :
 
 		for (int i = 0; i < Y; ++i) {
 			for (int j = 0; j < X; ++j) {
-				int dundundun = g->configureDir();
-				this->pieces[j][i]->setOrientation(dundundun);
+				this->pieces[j][i]->setOrientation(g->configureDir());
 			}
 		}
 	}
@@ -139,12 +142,14 @@ public :
 	}
 
 	void update(float frameTime) {
+	//Background update
 		if (this->bkgSource != '\0') {
 			this->background.setX(this->x);
 			this->background.setY(this->y);
 			this->background.update(frameTime);
 		}
 
+	//Update the T objects
 		T* current;
 
 		for (int i = 0; i < X; ++i) {
@@ -154,7 +159,18 @@ public :
 				current->setY(this->y + j * gridNS::PADDING + j * gridNS::HEIGHT);
 				current->update(frameTime);
 			}
-		}        
+		}
+
+	//Check for clicks
+		if (this->input->getMouseLButton()) {
+			int mouseX = this->input->getMouseX();
+			int mouseY = this->input->getMouseY();
+
+		//What tile was clicked on?
+
+
+			this->callback(this->pieces[0][0]);
+		}
 	}
 };
 

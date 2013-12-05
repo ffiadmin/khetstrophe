@@ -20,7 +20,7 @@ void OliverTest::collisions() {
 	//}
 }
 
-void gameEvent(Tile *tile) {
+void callback(Tile *tile) {
 
 }
 
@@ -42,7 +42,7 @@ void OliverTest::initialize(HWND hwnd) {
 	this->kp = new KhetParser<Tile>("config\\classic.txt");
 
 //Create the Grid
-	this->g = new Grid<Tile, 10, 8>(this, graphics, gameEvent);
+	this->g = new Grid<Tile, 10, 8>(this, graphics, callback);
 	this->g->setBkg("pictures\\GameBoard.png");
 	this->g->initialize(this->kp);
 

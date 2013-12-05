@@ -7,6 +7,8 @@
 #include "Laser.h"
 #include "Tile.h"
 
+void callback(Tile* t);
+
 class OliverTest :	public Game {
 private : 
 	char dir;
