@@ -78,7 +78,7 @@ void Khet::callback(ClickData<KhetPiece> d) {
 
 	if (color == turn) {
 
-	} else {
+	} else if(d.tile->getVisible()){
 		MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
 	}
 }
@@ -227,7 +227,7 @@ void Khet::update() {
 					numGrid.setX(active.x * 64 - 64);
 					numGrid.setY(active.y * 64 - 64);
 				}
-				else {
+				else if(active.tile->getVisible()){
 					MessageBox(NULL, "This isn't your piece", "Error", MB_OK);
 				}
 				clickedThisFrame = true;
